@@ -59,8 +59,12 @@ case $OS in
 
     # Install dependencies.
     append_dockerfile "RUN apt-get update"
-    append_dockerfile "RUN apt-get -y install build-essential clang git maven autoconf libtool"
+    append_dockerfile "RUN apt-get -y install build-essential clang-3.5 git maven autoconf libtool"
     append_dockerfile "RUN apt-get -y install openjdk-7-jdk python-dev python-boto libcurl4-nss-dev libsasl2-dev libapr1-dev libsvn-dev libevent-dev libev-dev"
+
+    # Symlink clang.
+    append_dockerfile "RUN ln -s /usr/bin/clang-3.5 /usr/bin/clang"
+    append_dockerfile "RUN ln -s /usr/bin/clang++-3.5 /usr/bin/clang++"
 
     # Add an unpriviliged user.
     append_dockerfile "RUN adduser --disabled-password --gecos '' mesos"
