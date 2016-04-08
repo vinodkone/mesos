@@ -165,7 +165,7 @@ def patch_id():
 
 def apply_patch():
   """Applies patch locally."""
-  cmd = 'git apply --index {review_id}.patch'\
+  cmd = 'git apply --3way --index {review_id}.patch'\
         .format(review_id=patch_id())
   shell(cmd, options['dry_run'])
 
