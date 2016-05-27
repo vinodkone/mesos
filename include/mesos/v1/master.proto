@@ -1,0 +1,467 @@
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import "mesos/v1/mesos.proto";
+
+import "mesos/v1/maintenance/maintenance.proto";
+
+import "mesos/v1/quota/quota.proto";
+
+package mesos.v1.master;
+
+option java_package = "org.apache.mesos.v1.master";
+option java_outer_classname = "Protos";
+
+/**
+ * Calls that can be sent to the master.
+ *
+ * A call is described using the standard protocol buffer "union"
+ * trick, see
+ * https://developers.google.com/protocol-buffers/docs/techniques#union.
+ */
+message Call {
+  // This message represents all possible calls that can be made
+  // against the v1 master API. Each call is a combination of
+  // VERB + NOUN to describe the type of operation that should be
+  // performed as well as what resource that operation should be
+  // performed on.
+  enum Type {
+    UNKNOWN = 0;
+
+    // Get the health of the master.
+    // Returns `Response` of type `HEALTH`.
+    CHECK_HEALTH = 1;
+
+    // Get the flags that are used by the master.
+    // Returns `Response` of type `FLAGS`.
+    GET_FLAGS = 2;
+
+    // Get the version information of the master.
+    // Returns `Response` of type `VERSION`.
+    GET_VERSION_INFO = 3;
+
+    // Get cluster wide metrics.
+    // See `GetMetrics` for parameters.
+    // Returns `Response` of type `METRICS`.
+    GET_METRICS = 4;
+
+    // Get the state of the cluster.
+    // Returns `Response of type `STATE`.
+    GET_STATE = 5;
+
+    // Get the summary of the cluster state.
+    // Returns `Response` of type `STATE_SUMMARY`.
+    GET_STATE_SUMMARY = 6;
+
+    // Get the current logging level in use by the logging library.
+    // Returns `Response` of type `LOGGING_LEVEL`.
+    GET_LOGGING_LEVEL = 7;
+
+    // Dynamically changes the logging level. This can be used to
+    // increase the logging level during debugging.
+    // See 'SetLoggingLevel' below for parameters.
+    // Returns nothing.
+    SET_LOGGING_LEVEL = 8;
+
+    // Get the list of files (e.g., master log) that can be accessed.
+    // See 'ListFiles' below for the parameters.
+    // Returns `Response` of type `FILES`.
+    LIST_FILES = 9;
+
+    // Reads the contents of the file requested.
+    // See `ReadFile` below for the parameters.
+    // Returns `Response of type `FILE_CONTENTS`.
+    READ_FILE = 10;
+
+    // Get the information about all the agents known to the master.
+    // Returns `Response` of type `AGENTS`.
+    GET_AGENTS = 11;
+
+    // Get information about all the frameworks known to the master.
+    // Returns `Response` of type `FRAMEWORKS`.
+    GET_FRAMEWORKS = 12;
+
+    // Get the information about all the tasks known to the master.
+    // See `GetTasks` below for the parameters.
+    // Returns `Response` of type `TASKS`.
+    GET_TASKS = 13;
+
+    // Get the information about all the roles known to the master.
+    // Returns `Response` of type `ROLES`.
+    GET_ROLES = 14;
+
+    // Get the information about all the roles' weights known to the master.
+    // Returns `Response` of type `WEIGHTS`.
+    GET_WEIGHTS = 15;
+
+    // Update the weights of the roles.
+    // Returns nothing.
+    UPDATE_WEIGHTS = 16;
+
+    // Returns the information about the current leading master.
+    // Returns `Response` of type `MASTER_INFO`.
+    GET_LEADING_MASTER = 17;
+
+    // Tears down the given framework by shutting down all its executors
+    // and tasks and removing the framework from the master.
+    // See `TearDown` framework for the parameters.
+    // Returns nothing.
+    TEARDOWN_FRAMEWORK = 18;
+
+    // Dynamically reserve the resources.
+    // See `ReserveResources` for the parameters.
+    // Returns nothing.
+    RESERVE_RESOURCES = 19;
+
+    // Unreserve the dynamically reserved resources.
+    // See `UnreserveResources` for the parameters.
+    // Returns nothing.
+    UNRESERVE_RESOURCES = 20;
+
+    // Create volumes on reserved resources.
+    // See `CreateVolumes` for the parameters.
+    // Returns nothing.
+    CREATE_VOLUMES = 21;
+
+    // Destroy volumes.
+    // See `CreateVolumes` for the parameters.
+    // Returns nothing.
+    DESTROY_VOLUMES = 22;
+
+    // Get the current status of maintenance.
+    // Returns `Response` of type `MAINTENANCE_STATUS`.
+    GET_MAINTENANCE_STATUS = 23;
+
+    // Get the current maintenance schedule.
+    // Returns `Response` of type `MAINTENANCE_SCHEDULE`.
+    GET_MAINTENANCE_SCHEDULE = 24;
+
+    // Update the maintenance schedule.
+    // See `UpdateMaintenanceSchedule` for the parameters.
+    // Returns nothing.
+    UPDATE_MAINTENANCE_SCHEDULE = 25;
+
+    // Start the maintenance on a given list of machines.
+    // See `StartMaintenance` for the parameters.
+    // Returns nothing.
+    START_MAINTENANCE = 26;
+
+    // Stop the maintenance on a given list of machines.
+    // See `StopMaintenance` for the parameters.
+    // Returns nothing.
+    STOP_MAINTENANCE = 27;
+
+    // Get all the quotas that are set.
+    // Returns `Response` of type `QUOTA`.
+    GET_QUOTA = 28;
+
+    // Set the quota for a given role.
+    // See `SetQuota` for the parameters.
+    // Returns nothing.
+    SET_QUOTA = 29;
+
+    // Removes the quota for a given role.
+    // See `RemoveQuota` for the parameters.
+    // Returns nothing.
+    REMOVE_QUOTA = 30;
+
+    // Subscribe to an event stream.
+    // Returns a never ending stream of `Event`s.
+    SUBSCRIBE_EVENTS = 31;
+  }
+
+  // The messages capture additional parameters for calls.
+
+  message GetMetrics {
+    optional string timeout = 1;
+  }
+
+  message SetLoggingLevel {
+    required uint32 level = 1;
+    required DurationInfo duration = 2;
+  }
+
+  message ListFiles {
+    required string path = 1;
+  }
+
+  message ReadFile {
+    required string path = 1;
+    optional string offset = 2;
+    optional string length = 3;
+  }
+
+  message GetTasks {
+    optional string limit = 1;
+    optional uint32 offset = 2;
+    optional string order = 3;
+  }
+
+  message UpdateWeights {
+    repeated WeightInfo weight_infos = 1;
+  }
+
+  message ReserveResources {
+    required AgentID agent_id = 1;
+    repeated Resource resources = 2;
+  }
+
+  message UnreserveResources {
+    required AgentID agent_id = 1;
+    repeated Resource resources = 2;
+  }
+
+  message CreateVolumes {
+    required AgentID agent_id = 1;
+    repeated Resource volumess = 2;
+  }
+
+  message DestroyVolumes {
+    required AgentID agent_id = 1;
+    repeated Resource volumess = 2;
+  }
+
+  message TeardownFramework {
+    required FrameworkID framework_id = 1;
+  }
+
+  message UpdateMaintenanceSchedule {
+    required maintenance.Schedule schedule = 1;
+  }
+
+  message StartMaintenance {
+    repeated MachineID machines = 1;
+  }
+
+  message StopMaintenance {
+    repeated MachineID machines = 1;
+  }
+
+  message SetQuota {
+    required quota.QuotaRequest quota_request = 1;
+  }
+
+  message RemoveQuota {
+    required string role = 1;
+  }
+
+  optional Type type = 1;
+
+  optional GetMetrics get_metrics = 2;
+
+  optional SetLoggingLevel set_logging_level = 4;
+
+  optional ListFiles get_files = 5;
+  optional ReadFile read_file = 6;
+
+  optional GetTasks get_tasks = 8;
+
+  optional ReserveResources reserve_resources = 9;
+  optional UnreserveResources unreserve_resources = 10;
+
+  optional CreateVolumes create_volumes = 11;
+  optional DestroyVolumes destroy_volumes = 12;
+
+  optional TeardownFramework teardown_framework = 13;
+
+  optional UpdateMaintenanceSchedule update_maintenance_schedule = 14;
+  optional StartMaintenance start_maintenance = 15;
+  optional StopMaintenance stop_maintenance  = 16;
+
+  optional SetQuota set_quota = 17;
+  optional RemoveQuota remove_quota = 18;
+}
+
+
+/**
+ * Synchronous responses to all Calls (except Call::SUBSCRIBE_EVENTS) made to
+ * the master.
+ */
+message Response {
+
+  enum Type {
+    UNKNOWN = 0;
+    HEALTH = 1;                 // See `Health` below.
+    FLAGS = 2;                  // See `Flags` below.
+    VERSION_INFO = 3;           // See `VersionInfo` below.
+    METRICS = 4;                // See `Metrics` below.
+    STATE = 5;                  // See `State` below.
+    STATE_SUMMARY = 6;          // See `StateSummary` below.
+    LOGGING_LEVEL = 7;          // See `LoggingLevel` below.
+    FILES = 8;                  // See `Files` below.
+    FILE_CONTENTS = 9;          // See `FileContents` below.
+    AGENTS = 10;                // See `Agents` below.
+    FRAMEWORKS = 11;            // See `Frameworks` below.
+    TASKS = 12;                 // See `Tasks` below.
+    ROLES = 13;                 // See `Flags` below.
+    WEIGHTS = 14;               // See `Weights` below.
+    LEADING_MASTER = 15;        // See `LeadingMaster` below.
+    MAINTENANCE_STATUS = 16;    // See `MaintenanceStatus` below.
+    MAINTENANCE_SCHEDULE = 17;  // See `MaintenanceSchedule` below.
+    QUOTA = 18;                 // See `Quota` below.
+  }
+
+  message Health {
+    required bool healthy = 1;
+  }
+
+  message Flags {
+    message Flag {
+      required string name = 1;
+      required string value = 2;
+    }
+
+    repeated Flag flags = 1;
+  }
+
+  message VersionInfo {
+    required string version = 1;
+    required string build_date = 2;
+    required string build_time = 3;
+    required string build_user = 4;
+    optional string git_sha = 5;
+    optional string git_branch = 6;
+    optional string git_tag = 7;
+  }
+
+  message Metrics {
+    message Metric {
+      required string key = 1;
+      required double value = 2;
+    }
+
+    repeated Metric gauges = 1;
+    repeated Metric counters = 2;
+  }
+
+  message State {
+    // TODO(vinod): Fill in the fields.
+  }
+
+  message StateSummary {
+    // TODO(vinod): Fill in the fields.
+  }
+
+  message LoggingLevel {
+    required uint32 level = 1;
+  }
+
+  message Files {
+    repeated string files = 1;
+  }
+
+  message FileContents {
+    repeated bytes data = 1;
+  }
+
+  message Agents {
+    message Agent {
+      // TODO(vinod): Fill in the fields.
+    }
+
+    repeated Agent agents = 1;
+  }
+
+  message Frameworks {
+    message Framework {
+    // TODO(vinod): Fill in the fields.
+    }
+
+    repeated Framework frameworks = 1;
+  }
+
+  message Tasks {
+    message Task {
+      // TODO(vinod): Fill in the fields.
+    }
+
+    repeated Task tasks = 1;
+  }
+
+  message Roles {
+    message Role {
+      // TODO(vinod): Fill in the fields.
+    }
+
+    repeated Role roles = 1;
+  }
+
+  message Weights {
+    repeated WeightInfo weight_infos = 1;
+  }
+
+  message LeadingMaster {
+    optional MasterInfo master_info = 1;
+  }
+
+  message MaintenanceStatus {
+    required maintenance.ClusterStatus status = 1;
+  }
+
+  message MaintenanceSchedule {
+    required maintenance.Schedule schedule = 1;
+  }
+
+  message Quota {
+    required quota.QuotaStatus status = 1;
+  }
+
+  optional Type type = 1;
+
+  optional Flags flags = 2;
+  optional VersionInfo version_info = 3;
+  optional Metrics metrics = 4;
+  optional State state = 5;
+  optional StateSummary state_summary = 6;
+  optional Files files = 7;
+  optional FileContents file_contents = 8;
+  optional Agents agents = 9;
+  optional Frameworks frameworks = 10;
+  optional Tasks tasks = 11;
+  optional Roles roles = 12;
+  optional Weights weights = 13;
+  optional MaintenanceStatus maintenance_tatus = 14;
+  optional MaintenanceSchedule maintenance_schedule = 15;
+  optional Quota quota = 16;
+}
+
+
+/**
+ * Streaming response to Call::SUBSCRIBE_EVENTS made to the master.
+ */
+message Event {
+  enum Type {
+    // This must be the first enum value in this list, to
+    // ensure that if 'type' is not set, the default value
+    // is UNKNOWN. This enables enum values to be added
+    // in a backwards-compatible way. See: MESOS-4997.
+    UNKNOWN = 0;
+
+    UPDATE = 1; // See `Update` below.
+
+    // TODO(vinod): Fill in more events.
+  }
+
+  // Status updates forwarded by the master.
+  // See the comments in scheduler.proto for further details.
+  message Update {
+    required TaskStatus status = 1;
+  }
+
+  optional Type type = 1;
+
+  optional Update update = 2;
+}
