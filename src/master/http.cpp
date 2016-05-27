@@ -25,6 +25,8 @@
 
 #include <boost/array.hpp>
 
+#include <mesos/v1/master.hpp>
+
 #include <mesos/attributes.hpp>
 #include <mesos/type_utils.hpp>
 
@@ -97,6 +99,7 @@ using process::http::Pipe;
 using process::http::ServiceUnavailable;
 using process::http::TemporaryRedirect;
 using process::http::UnsupportedMediaType;
+using process::http::URL;
 
 using process::metrics::internal::MetricsProcess;
 
@@ -323,6 +326,265 @@ void Master::Http::log(const Request& request)
 }
 
 
+string Master::Http::API_HELP()
+{
+  return HELP(
+    TLDR(
+        "Endpoint for API calls against the master."),
+    DESCRIPTION(
+        "Returns 200 OK when the request was processed sucessfully.",
+        "Returns 307 TEMPORARY_REDIRECT redirect to the leading master when",
+        "current master is not the leader.",
+        "Returns 503 SERVICE_UNAVAILABLE if the leading master cannot be",
+        "found."),
+    AUTHENTICATION(true));
+}
+
+
+Future<Response> Master::Http::api(
+    const Request& request,
+    const Option<string>& principal) const
+{
+  // TODO(vinod): Add metrics for rejected requests.
+
+  // TODO(vinod): Add support for rate limiting.
+
+  // When current master is not the leader, redirect to the leading master.
+  // Note that this could happen when an operator, or some other
+  // service, including a scheduler realizes this is the leading
+  // master before the master itself realizes it, e.g., due to a
+  // ZooKeeper watch delay.
+  if (!master->elected()) {
+    return redirect(request);
+  }
+
+  CHECK_SOME(master->recovered);
+
+  if (!master->recovered.get().isReady()) {
+    return ServiceUnavailable("Master has not finished recovery");
+  }
+
+  if (request.method != "POST") {
+    return MethodNotAllowed({"POST"}, request.method);
+  }
+
+  v1::master::Call call;
+
+  // TODO(anand): Content type values are case-insensitive.
+  Option<string> contentType = request.headers.get("Content-Type");
+
+  if (contentType.isNone()) {
+    return BadRequest("Expecting 'Content-Type' to be present");
+  }
+
+  if (contentType.get() == APPLICATION_PROTOBUF) {
+    if (!call.ParseFromString(request.body)) {
+      return BadRequest("Failed to parse body into Call protobuf");
+    }
+  } else if (contentType.get() == APPLICATION_JSON) {
+    Try<JSON::Value> value = JSON::parse(request.body);
+
+    if (value.isError()) {
+      return BadRequest("Failed to parse body into JSON: " + value.error());
+    }
+
+    Try<v1::master::Call> parse =
+      ::protobuf::parse<v1::master::Call>(value.get());
+
+    if (parse.isError()) {
+      return BadRequest("Failed to convert JSON into Call protobuf: " +
+                        parse.error());
+    }
+
+    call = parse.get();
+  } else {
+    return UnsupportedMediaType(
+        string("Expecting 'Content-Type' of ") +
+        APPLICATION_JSON + " or " + APPLICATION_PROTOBUF);
+  }
+
+  Option<Error> error = validation::master::call::validate(call, principal);
+
+  if (error.isSome()) {
+    return BadRequest("Failed to validate v1::master::Call: " +
+                      error.get().message);
+  }
+
+  // TODO(benh): Handle ``SUBSCRIBE` call. See `scheduler()` implementation
+  // for details.
+
+  // Construct a generic URL that can be reused in subsequent requests
+  // below based on the request URL but without the '/api/v1' in the
+  // `path`.
+  string path = request.url.path;
+  path = strings::trim(path, strings::SUFFIX, "/" + strings::WHITESPACE);
+  path = strings::remove(path, "/api/v1", strings::SUFFIX);
+
+  process::http::URL url = request.url;
+  url.path = path;
+
+  switch (call.type()) {
+    case v1::master::Call::UNKNOWN:
+      return NotImplemented();
+
+    case v1::master::Call::CHECK_HEALTH:
+      return NotImplemented();
+
+    case v1::master::Call::GET_FLAGS:
+    {
+      // Construct the proper URL for '/flags' endpoint.
+      // TODO(benh): Does this need to be '/master/flags'?
+      process::http::URL url_ = url;
+      url_.path = path::join(stringify(url_), "/flags");
+
+      Request request_;
+      request_.method = "GET";
+      request_.url = url_;
+      request_.headers = request.headers;
+      // NOTE: No `body` expected to be passed along.
+      request_.keepAlive = request.keepAlive;
+      request_.client = request.client;
+      return flags(request_, principal)
+        .then([&request_](Response response) -> Response {
+            // Bail if this wasn't successful.
+            if (response.code != process::http::Status::OK) {
+              return response;
+            }
+
+            // Now we need to convert to a v1::master::Response.
+            v1::master::Response v1Response;
+            v1Response.set_type(v1::master::Response::GET_FLAGS);
+
+            v1::master::Response::GetFlags* getFlags
+              = v1Response.mutable_get_flags();
+
+            Try<JSON::Object> object = JSON::parse<JSON::Object>(response.body);
+            if (object.isError()) {
+              return InternalServerError(
+                  "Failed to parse flags: " + object.error());
+            }
+
+            foreachpair (const string& key,
+                         const JSON::Value& value,
+                         object.get().values) {
+              v1::Flag* flag = getFlags->add_flags();
+              flag->set_name(key);
+
+              if (!value.is<JSON::String>()) {
+                return InternalServerError(
+                    "Flag '" + key + "' value is not a string");
+              }
+              flag->set_value(value.as<JSON::String>().value);
+            }
+
+            ContentType responseContentType;
+            if (request_.acceptsMediaType(APPLICATION_JSON)) {
+              responseContentType = ContentType::JSON;
+            } else if (request_.acceptsMediaType(APPLICATION_PROTOBUF)) {
+              responseContentType = ContentType::PROTOBUF;
+            } else {
+              return NotAcceptable(
+                  string("Expecting 'Accept' to allow ") +
+                  "'" + APPLICATION_PROTOBUF + "' or '" +
+                  APPLICATION_JSON + "'");
+            }
+
+            response.headers["Content-Type"] = stringify(responseContentType);
+            response.body = serialize(responseContentType, v1Response);
+
+            return response;
+        });
+    }
+    case v1::master::Call::GET_VERSION:
+      return NotImplemented();
+
+    case v1::master::Call::GET_METRICS:
+      return NotImplemented();
+
+    case v1::master::Call::GET_LOGGING_LEVEL:
+      return NotImplemented();
+
+    case v1::master::Call::SET_LOGGING_LEVEL:
+      return NotImplemented();
+
+    case v1::master::Call::LIST_FILES:
+      return NotImplemented();
+
+    case v1::master::Call::READ_FILE:
+      return NotImplemented();
+
+    case v1::master::Call::GET_STATE:
+      return NotImplemented();
+
+    case v1::master::Call::GET_STATE_SUMMARY:
+      return NotImplemented();
+
+    case v1::master::Call::GET_AGENTS:
+      return NotImplemented();
+
+    case v1::master::Call::GET_FRAMEWORKS:
+      return NotImplemented();
+
+    case v1::master::Call::GET_TASKS:
+      return NotImplemented();
+
+    case v1::master::Call::GET_ROLES:
+      return NotImplemented();
+
+    case v1::master::Call::GET_WEIGHTS:
+      return NotImplemented();
+
+    case v1::master::Call::UPDATE_WEIGHTS:
+      return NotImplemented();
+
+    case v1::master::Call::GET_LEADING_MASTER:
+      return NotImplemented();
+
+    case v1::master::Call::RESERVE_RESOURCES:
+      return NotImplemented();
+
+    case v1::master::Call::UNRESERVE_RESOURCES:
+      return NotImplemented();
+
+    case v1::master::Call::CREATE_VOLUMES:
+      return NotImplemented();
+
+    case v1::master::Call::DESTROY_VOLUMES:
+      return NotImplemented();
+
+    case v1::master::Call::GET_MAINTENANCE_STATUS:
+      return NotImplemented();
+
+    case v1::master::Call::GET_MAINTENANCE_SCHEDULE:
+      return NotImplemented();
+
+    case v1::master::Call::UPDATE_MAINTENANCE_SCHEDULE:
+      return NotImplemented();
+
+    case v1::master::Call::START_MAINTENANCE:
+      return NotImplemented();
+
+    case v1::master::Call::STOP_MAINTENANCE:
+      return NotImplemented();
+
+    case v1::master::Call::GET_QUOTA:
+      return NotImplemented();
+
+    case v1::master::Call::SET_QUOTA:
+      return NotImplemented();
+
+    case v1::master::Call::REMOVE_QUOTA:
+      return NotImplemented();
+
+    // TODO(benh): Rename to just SUBSCRIBE instead?
+    case v1::master::Call::SUBSCRIBE:
+      return NotImplemented();
+  }
+
+  return NotImplemented();
+}
+
+
 // TODO(ijimenez): Add some information or pointers to help
 // users understand the HTTP Event/Call API.
 string Master::Http::SCHEDULER_HELP()
@@ -350,7 +612,8 @@ Future<Response> Master::Http::scheduler(
 
   // When current master is not the leader, redirect to the leading master.
   // Note that this could happen if the scheduler realizes this is the
-  // leading master before master itself realizes it (e.g., ZK watch delay).
+  // leading master before the master itself realizes it, e.g., due to
+  // a ZooKeeper watch delay.
   if (!master->elected()) {
     return redirect(request);
   }
@@ -405,14 +668,15 @@ Future<Response> Master::Http::scheduler(
   Option<Error> error = validation::scheduler::call::validate(call, principal);
 
   if (error.isSome()) {
-    return BadRequest("Failed to validate Scheduler::Call: " +
+    return BadRequest("Failed to validate scheduler::Call: " +
                       error.get().message);
   }
 
   if (call.type() == scheduler::Call::SUBSCRIBE) {
-    // We default to JSON since an empty 'Accept' header
-    // results in all media types considered acceptable.
-    ContentType responseContentType;
+    // We default to JSON 'Content-Type' in the response since an
+    // empty 'Accept' header results in all media types considered
+    // acceptable.
+    ContentType responseContentType = ContentType::JSON;
 
     if (request.acceptsMediaType(APPLICATION_JSON)) {
       responseContentType = ContentType::JSON;

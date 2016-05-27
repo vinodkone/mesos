@@ -36,6 +36,7 @@ inline std::ostream& operator<<(
   std::ostream& stream, const Response::Type& type)
 {
   return stream << Response::Type_Name(type);
+}
 
 
 inline std::ostream& operator<<(std::ostream& stream, const Event::Type& type)
