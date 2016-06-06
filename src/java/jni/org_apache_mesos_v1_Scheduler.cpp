@@ -20,6 +20,8 @@
 
 #include <process/owned.hpp>
 
+#include <mesos/v1/mesos.hpp>
+
 #include <mesos/v1/scheduler.hpp>
 
 #include <mesos/v1/scheduler/scheduler.hpp>
@@ -27,6 +29,7 @@
 #include <stout/foreach.hpp>
 #include <stout/lambda.hpp>
 #include <stout/net.hpp>
+#include <stout/option.hpp>
 #include <stout/os.hpp>
 #include <stout/result.hpp>
 #include <stout/try.hpp>
@@ -48,7 +51,10 @@ namespace v1 {
 class JNIScheduler
 {
 public:
-  JNIScheduler(JNIEnv* _env, jweak _jscheduler, const string& master)
+  JNIScheduler(JNIEnv* _env,
+               jweak _jscheduler,
+               const string& master,
+               const Option<mesos::v1::Credential>& credential)
     : jvm(NULL), env(_env), jscheduler(_jscheduler)
   {
     env->GetJavaVM(&jvm);
@@ -58,7 +64,8 @@ public:
             mesos::ContentType::PROTOBUF,
             std::bind(&JNIScheduler::connected, this),
             std::bind(&JNIScheduler::disconnected, this),
-            std::bind(&JNIScheduler::received_, this, lambda::_1)));
+            std::bind(&JNIScheduler::received_, this, lambda::_1),
+            credential));
   }
 
   virtual ~JNIScheduler() {}
@@ -188,9 +195,11 @@ JNIEXPORT void JNICALL Java_org_apache_mesos_v1_Scheduler_initialize
   jfieldID master = env->GetFieldID(clazz, "master", "Ljava/lang/String;");
   jobject jmaster = env->GetObjectField(thiz, master);
 
+  // TODO(vinod): Extract the credential.
+
   // Create the C++ scheduler and initialize the __scheduler variable.
-  v1::JNIScheduler* scheduler =
-    new v1::JNIScheduler(env, jscheduler, construct<string>(env, jmaster));
+  v1::JNIScheduler* scheduler = new v1::JNIScheduler(
+      env, jscheduler, construct<string>(env, jmaster), None());
 
   jfieldID __scheduler = env->GetFieldID(clazz, "__scheduler", "J");
   env->SetLongField(thiz, __scheduler, (jlong) scheduler);
