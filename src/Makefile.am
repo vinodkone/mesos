@@ -1478,7 +1478,8 @@ EXAMPLES_SOURCE =							\
   $(srcdir)/examples/java/TestExecutor.java				\
   $(srcdir)/examples/java/TestFramework.java				\
   $(srcdir)/examples/java/TestLog.java					\
-  $(srcdir)/examples/java/TestMultipleExecutorsFramework.java
+  $(srcdir)/examples/java/TestMultipleExecutorsFramework.java		\
+  $(srcdir)/examples/java/V1TestFramework.java
 EXTRA_DIST += $(EXAMPLES_SOURCE)
 
 

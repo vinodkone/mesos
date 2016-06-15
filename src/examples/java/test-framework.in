@@ -36,4 +36,4 @@ cd `dirname ${0}`
 
 exec ${JAVA} -cp ${PROTOBUF_JAR}:${MESOS_JAR}:${EXAMPLES_JAR} \
   -Djava.library.path=${MESOS_BUILD_DIR}/src/.libs \
-  TestFramework "${@}"
+  V1TestFramework "${@}"
