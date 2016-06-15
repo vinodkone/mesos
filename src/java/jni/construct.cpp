@@ -25,6 +25,8 @@
 
 #include <mesos/mesos.hpp>
 
+#include <mesos/v1/scheduler/scheduler.hpp>
+
 #include "construct.hpp"
 
 using namespace mesos;
@@ -398,4 +400,25 @@ Offer::Operation construct(JNIEnv* env, jobject jobj)
   env->ReleaseByteArrayElements(jdata, data, 0);
 
   return operation;
+}
+
+
+template<>
+v1::scheduler::Call construct(JNIEnv* env, jobject jobj)
+{
+  jclass clazz = env->GetObjectClass(jobj);
+
+  // byte[] data = obj.toByteArray();
+  jmethodID toByteArray = env->GetMethodID(clazz, "toByteArray", "()[B");
+
+  jbyteArray jdata = (jbyteArray) env->CallObjectMethod(jobj, toByteArray);
+
+  jbyte* data = env->GetByteArrayElements(jdata, NULL);
+  jsize length = env->GetArrayLength(jdata);
+
+  const v1::scheduler::Call& call = parse<v1::scheduler::Call>(data, length);
+
+  env->ReleaseByteArrayElements(jdata, data, 0);
+
+  return call;
 }
