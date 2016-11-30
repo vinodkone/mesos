@@ -54,6 +54,7 @@
 #include "tests/containerizer/mock_containerizer.hpp"
 
 namespace http = process::http;
+namespace unix = process::network::unix;
 
 using mesos::master::detector::MasterDetector;
 using mesos::master::detector::StandaloneMasterDetector;
@@ -76,6 +77,9 @@ using process::Failure;
 using process::Future;
 using process::Owned;
 using process::Promise;
+
+using process::network::inet::Address;
+using process::network::inet::Socket;
 
 using recordio::Decoder;
 
@@ -3688,6 +3692,180 @@ TEST_P(AgentAPITest, LaunchNestedContainerSessionAttachFailure)
   AWAIT_READY(containerIds);
   EXPECT_EQ(1u, containerIds->size());
   EXPECT_FALSE(containerIds->contains(devolve(containerId)));
+
+  EXPECT_CALL(exec, shutdown(_))
+    .Times(AtMost(1));
+
+  driver.stop();
+  driver.join();
+}
+
+
+// This test verifies that launching a nested container session results
+// in output being streamed.
+// TODO(vinod): Update this test once mesos containerizer
+// supports `attach`.
+TEST_P(AgentAPITest, LaunchNestedContainerSession)
+{
+  ContentType contentType = GetParam();
+
+  Clock::pause();
+
+  Try<Owned<cluster::Master>> master = StartMaster();
+  ASSERT_SOME(master);
+
+  Owned<MasterDetector> detector = master.get()->createDetector();
+
+  MockExecutor exec(DEFAULT_EXECUTOR_ID);
+  TestContainerizer containerizer(&exec);
+
+  Try<Owned<cluster::Slave>> slave =
+    StartSlave(detector.get(), &containerizer);
+
+  ASSERT_SOME(slave);
+
+  MockScheduler sched;
+  MesosSchedulerDriver driver(
+      &sched, DEFAULT_FRAMEWORK_INFO, master.get()->pid, DEFAULT_CREDENTIAL);
+
+  EXPECT_CALL(sched, registered(&driver, _, _))
+    .Times(1);
+
+  Future<vector<Offer>> offers;
+  EXPECT_CALL(sched, resourceOffers(&driver, _))
+    .WillOnce(LaunchTasks(DEFAULT_EXECUTOR_INFO, 1, 0.1, 32, "*"))
+    .WillRepeatedly(Return()); // Ignore subsequent offers.
+
+  Future<Nothing> executorRegistered;
+  EXPECT_CALL(exec, registered(_, _, _, _))
+    .WillOnce(FutureSatisfy(&executorRegistered));
+
+  EXPECT_CALL(exec, launchTask(_, _))
+    .Times(1);
+
+  driver.start();
+
+  AWAIT_READY(executorRegistered);
+
+  // Setup a mock switch board HTTP server.
+  Try<unix::Socket> server = unix::Socket::create();
+  ASSERT_SOME(server);
+
+  Try<unix::Address> address = unix::Address::create("\0socket");
+  ASSERT_SOME(address);
+
+  ASSERT_SOME(server->bind(address.get()));
+  ASSERT_SOME(server->listen(1));
+
+  Future<unix::Socket> socket = server->accept();
+
+  Future<http::Connection> connection = http::connect(address.get());
+  AWAIT_READY(connection);
+
+  AWAIT_READY(socket);
+
+  class Handler
+  {
+  public:
+    MOCK_METHOD1(handle, Future<http::Response>(const http::Request&));
+  } handler;
+
+  Future<Nothing> serve = http::serve(
+    socket.get(),
+    [&](const http::Request& request) {
+      return handler.handle(request);
+    });
+
+  EXPECT_CALL(containerizer, attach(_))
+    .WillOnce(Return(connection));
+
+  http::Pipe pipe;
+  http::OK ok;
+  ok.headers["Content-Type"] = stringify(contentType);
+  ok.type = http::Response::PIPE;
+  ok.reader = pipe.reader();
+
+  Future<Nothing> handle;
+  EXPECT_CALL(handler, handle(_))
+    .WillOnce(DoAll(FutureSatisfy(&handle),
+                    Return(ok)));
+
+  Future<hashset<ContainerID>> containerIds = containerizer.containers();
+  AWAIT_READY(containerIds);
+  EXPECT_EQ(1u, containerIds->size());
+
+  v1::ContainerID containerId;
+  containerId.set_value(UUID::random().toString());
+  containerId.mutable_parent()->set_value(containerIds->begin()->value());
+
+  v1::agent::Call call;
+  call.set_type(v1::agent::Call::LAUNCH_NESTED_CONTAINER_SESSION);
+
+  call.mutable_launch_nested_container_session()->mutable_container_id()
+    ->CopyFrom(containerId);
+
+  http::Headers headers = createBasicAuthHeaders(DEFAULT_CREDENTIAL);
+  headers["Accept"] = stringify(contentType);
+
+  Future<http::Response> response = http::streaming::post(
+    slave.get()->pid,
+    "api/v1",
+    headers,
+    serialize(contentType, call),
+    stringify(contentType));
+
+  AWAIT_EXPECT_RESPONSE_STATUS_EQ(http::OK().status, response);
+
+  AWAIT_READY(handle);
+
+  // Nested container should be launched by now.
+  containerIds = containerizer.containers();
+  AWAIT_READY(containerIds);
+  ASSERT_TRUE(containerIds->contains(devolve(containerId)));
+
+  // Simulate a dummy ProcessIO message from the switch board.
+  agent::ProcessIO processIO;
+  processIO.set_type(agent::ProcessIO::DATA);
+  processIO.mutable_data()->set_type(agent::ProcessIO::Data::STDOUT);
+  processIO.mutable_data()->set_data("test");
+
+  ::recordio::Encoder<agent::ProcessIO> encoder (lambda::bind(
+      serialize, contentType, lambda::_1));
+
+  pipe.writer().write(encoder.encode(processIO));
+
+  // Ensure the client receives the ProcessIO message.
+  ASSERT_EQ(stringify(contentType), response->headers.at("Content-Type"));
+  ASSERT_EQ(http::Response::PIPE, response->type);
+  ASSERT_SOME(response->reader);
+
+  http::Pipe::Reader reader = response->reader.get();
+
+  auto deserializer =
+    lambda::bind(deserialize<v1::agent::ProcessIO>, contentType, lambda::_1);
+
+  Reader<v1::agent::ProcessIO> decoder(
+      ::recordio::Decoder<v1::agent::ProcessIO>(deserializer), reader);
+
+  Future<Result<v1::agent::ProcessIO>> processIO_ = decoder.read();
+  AWAIT_READY(processIO_);
+  ASSERT_SOME(processIO_.get());
+
+  // TODO(vinod): Add "==" operator overload for `ProcessIO`.
+  ASSERT_EQ(processIO.type(), processIO_->get().type());
+  ASSERT_EQ(processIO.data().type(), processIO_->get().data().type());
+  ASSERT_EQ(processIO.data().data(), processIO_->get().data().data());
+
+  EXPECT_TRUE(pipe.writer().close());
+
+  AWAIT_READY(serve);
+
+  // The nested container should be destroyed once
+  // the switchboard closes the pipe.
+  Clock::settle(); // Enusre callbacks are executed.
+  containerIds = containerizer.containers();
+  AWAIT_READY(containerIds);
+  ASSERT_FALSE(containerIds->contains(devolve(containerId)));
 
   EXPECT_CALL(exec, shutdown(_))
     .Times(AtMost(1));
