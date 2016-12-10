@@ -866,11 +866,11 @@ void tests::Environment::TemporaryDirectoryEventListener::OnTestEnd(
     }
 #endif
 
-    Try<Nothing> rmdir = os::rmdir(directory);
-    if (rmdir.isError()) {
-      LOG(ERROR) << "Failed to remove '" << directory
-                 << "': " << rmdir.error();
-    }
+//    Try<Nothing> rmdir = os::rmdir(directory);
+//    if (rmdir.isError()) {
+//      LOG(ERROR) << "Failed to remove '" << directory
+//                 << "': " << rmdir.error();
+//    }
   }
 
   directories.clear();

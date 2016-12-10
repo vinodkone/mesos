@@ -4114,9 +4114,9 @@ TEST_P(AgentAPIStreamingTest, AttachContainerInput)
     "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in "
     "culpa qui officia deserunt mollit anim id est laborum.";
 
-  while (Bytes(data.size()) < Megabytes(1)) {
-    data.append(data);
-  }
+//  while (Bytes(data.size()) < Megabytes(1)) {
+//    data.append(data);
+//  }
 
   http::Pipe pipe;
   http::Pipe::Writer writer = pipe.writer();
@@ -4160,6 +4160,8 @@ TEST_P(AgentAPIStreamingTest, AttachContainerInput)
     processIO->mutable_data()->set_type(v1::agent::ProcessIO::Data::STDIN);
     processIO->mutable_data()->set_data(dataChunk);
 
+    LOG(INFO) << "Writing data chunk: " << dataChunk;
+
     writer.write(encoder.encode(call));
   }
 
@@ -4176,7 +4178,7 @@ TEST_P(AgentAPIStreamingTest, AttachContainerInput)
     v1::agent::ProcessIO* processIO = attach->mutable_process_io();
     processIO->set_type(v1::agent::ProcessIO::DATA);
     processIO->mutable_data()->set_type(v1::agent::ProcessIO::Data::STDIN);
-    processIO->mutable_data()->set_data("");
+    processIO->mutable_data()->set_data("\n\x04");
 
     writer.write(encoder.encode(call));
   }

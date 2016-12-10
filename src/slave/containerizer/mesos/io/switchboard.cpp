@@ -1467,6 +1467,7 @@ Future<http::Response> IOSwitchboardServerProcess::attachContainerInput(
             // Receiving a `DATA` message with length 0 indicates
             // `EOF` so we should close `stdinToFd`.
             if (message.data().data().length() == 0) {
+              std::cerr << "Received data with EOF" << std::endl;
               os::close(stdinToFd);
               return true;
             }
