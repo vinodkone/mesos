@@ -3989,8 +3989,8 @@ INSTANTIATE_TEST_CASE_P(
         ContentType::STREAMING_PROTOBUF, ContentType::STREAMING_JSON));
 
 
-// This test launches a child container with the 'cat' command as the
-// entrypoint and attaches to its STDOUT via the attach output call.
+// This test launches a child container with TTY and the 'cat' command
+// as the entrypoint and attaches to its STDOUT via the attach output call.
 // It then verifies that any data streamed to the container via the
 // attach input call is received by the client on the output stream.
 TEST_P(AgentAPIStreamingTest, AttachContainerInput)
@@ -4050,7 +4050,7 @@ TEST_P(AgentAPIStreamingTest, AttachContainerInput)
   containerId.set_value(UUID::random().toString());
   containerId.mutable_parent()->set_value(containerIds->begin()->value());
 
-  // Launch the child container and then attach to it's output.
+  // Launch the child container with TTY and then attach to it's output.
 
   {
     v1::agent::Call call;
@@ -4061,6 +4061,12 @@ TEST_P(AgentAPIStreamingTest, AttachContainerInput)
 
     call.mutable_launch_nested_container()->mutable_command()
       ->CopyFrom(v1::createCommandInfo("cat"));
+
+    call.mutable_launch_nested_container()->mutable_container()
+      ->set_type(mesos::v1::ContainerInfo::MESOS);
+
+    call.mutable_launch_nested_container()->mutable_container()
+      ->mutable_tty_info();
 
     Future<http::Response> response = http::post(
         slave.get()->pid,
