@@ -64,7 +64,7 @@ case $OS in
 
     append_dockerfile "RUN apt-get update"
     append_dockerfile "RUN apt-get -y install build-essential $CLANG_PKG git maven autoconf libtool cmake"
-    append_dockerfile "RUN apt-get -y install openjdk-8-jdk python-dev python-six libz-dev libcurl4-nss-dev libsasl2-dev libapr1-dev libsvn-dev libevent-dev libev-dev"
+    append_dockerfile "RUN apt-get -y install openjdk-8-jdk python-dev python-six libz-dev libcurl4-nss-dev libssl-dev libsasl2-dev libapr1-dev libsvn-dev libevent-dev libev-dev"
     append_dockerfile "RUN apt-get -y install wget curl sed"
 
     # Add an unpriviliged user.
