@@ -17,12 +17,25 @@
 # limitations under the License.
 
 # This is a wrapper for building Mesos website locally.
+set -e
+set -o pipefail
 
-function exit_hook {
-  # Remove generated documents when exit.
-  bundle exec rake clean_docs
-}
+MESOS_DIR=$(git rev-parse --show-toplevel)
 
-trap exit_hook EXIT
+pushd $MESOS_DIR
 
-bundle exec rake && bundle exec rake dev
+TAG=mesos/website
+
+docker build -t $TAG site
+
+trap "docker rmi $TAG" EXIT
+
+docker run \
+  -it \
+  --rm \
+  -p 4567:4567 \
+  -p 35729:35729 \
+  -v $MESOS_DIR:/mesos \
+  $TAG
+
+popd # $MESOS_DIR
