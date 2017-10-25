@@ -505,6 +505,10 @@
     };
 
     var pollState = function() {
+      // import { XHRConnection } from "@dcos/connections";
+      // var XHRConnection = require('XHRConnection')
+      const connection = new XHRConnection("http://127.0.0.1");
+
       // When the current master is not the leader, the request is redirected to
       // the leading master automatically. This would cause a CORS error if we
       // use XMLHttpRequest here. To avoid the CORS error, we use JSONP as a
