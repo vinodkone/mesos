@@ -53,6 +53,10 @@ case ${BUILDTOOL} in
     # mkdir build && cd build
     #../configure ${CONFIGURATION}
     #make -j "${JOBS}" distcheck 2>&1
+    whoami
+    id
+    ls -la /
+    ls -la /SRC
     cp reports/3rdparty/stout/tests/report.xml /SRC/stout_report.xml
     cp reports/3rdparty/libprocess/src/tests/report.xml /SRC/libprocess_report.xml
     cp reports/src/tests/report.xml /SRC/mesos_report.xml

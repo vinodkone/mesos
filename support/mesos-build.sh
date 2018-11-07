@@ -34,6 +34,8 @@ if ! $(git diff-index --quiet HEAD --); then
   exit 1
 fi
 
+chmod 777 ${MESOS_DIR}
+
 docker run \
   --rm \
   -v "${MESOS_DIR}":/SRC:Z \
