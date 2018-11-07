@@ -53,9 +53,9 @@ case ${BUILDTOOL} in
     # mkdir build && cd build
     #../configure ${CONFIGURATION}
     #make -j "${JOBS}" distcheck 2>&1
-    cp test-reports/stout_report.xml /SRC/stout_report.xml
-    cp test-reports/libprocess_report.xml /SRC/libprocess_report.xml
-    cp test-reports/mesos_report.xml /SRC/mesos_report.xml
+    cp reports/3rdparty/stout/tests/report.xml /SRC/stout_report.xml
+    cp reports/3rdparty/libprocess/src/tests/report.xml /SRC/libprocess_report.xml
+    cp reports/src/tests/report.xmll /SRC/mesos_report.xml
     ;;
   cmake)
     # Transform autotools-like parameters to cmake-like.
