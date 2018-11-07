@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="355" failures="0" disabled="0" errors="0" timestamp="2018-11-07T11:11:07" time="0.969" name="AllTests">
+  <testsuite name="AdaptorTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Reversed" status="run" time="0" classname="AdaptorTest" />
+  </testsuite>
+  <testsuite name="ArchiverTest" tests="16" failures="0" disabled="0" errors="0" time="0.023">
+    <testcase name="ExtractEmptyInputFile" status="run" time="0.001" classname="ArchiverTest" />
+    <testcase name="ExtractInputFileNotFound" status="run" time="0" classname="ArchiverTest" />
+    <testcase name="ExtractTarGzFile" status="run" time="0.001" classname="ArchiverTest" />
+    <testcase name="ExtractTarFile" status="run" time="0.002" classname="ArchiverTest" />
+    <testcase name="ExtractZipFile" status="run" time="0.001" classname="ArchiverTest" />
+    <testcase name="ExtractInvalidZipFile" status="run" time="0.001" classname="ArchiverTest" />
+    <testcase name="ExtractZipFileWithDuplicatedEntries" status="run" time="0" classname="ArchiverTest" />
+    <testcase name="ExtractTarXZFile" status="run" time="0.003" classname="ArchiverTest" />
+    <testcase name="ExtractTarBZ2File" status="run" time="0.002" classname="ArchiverTest" />
+    <testcase name="ExtractTarBz2GzFile" status="run" time="0.003" classname="ArchiverTest" />
+    <testcase name="ExtractBz2FileFails" status="run" time="0.001" classname="ArchiverTest" />
+    <testcase name="ExtractGzFileFails" status="run" time="0.001" classname="ArchiverTest" />
+    <testcase name="SYMLINK_ExtractTarGzFileWithLinks" status="run" time="0.001" classname="ArchiverTest" />
+    <testcase name="ExtractTarGzFileWithDestinationDir" status="run" time="0.001" classname="ArchiverTest" />
+    <testcase name="ExtractZipFileWithDestinationDir" status="run" time="0.001" classname="ArchiverTest" />
+    <testcase name="ExtractZipFileWithLongDestinationDir" status="run" time="0.004" classname="ArchiverTest" />
+  </testsuite>
+  <testsuite name="Base64Test" tests="4" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Encode" status="run" time="0" classname="Base64Test" />
+    <testcase name="Decode" status="run" time="0" classname="Base64Test" />
+    <testcase name="EncodeURLSafe" status="run" time="0" classname="Base64Test" />
+    <testcase name="DecodeURLSafe" status="run" time="0.001" classname="Base64Test" />
+  </testsuite>
+  <testsuite name="BitsTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="CountSetBits" status="run" time="0" classname="BitsTest" />
+  </testsuite>
+  <testsuite name="BoundedHashMapTest" tests="5" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Set" status="run" time="0" classname="BoundedHashMapTest" />
+    <testcase name="EmptyMap" status="run" time="0" classname="BoundedHashMapTest" />
+    <testcase name="Foreach" status="run" time="0" classname="BoundedHashMapTest" />
+    <testcase name="ForeachConst" status="run" time="0" classname="BoundedHashMapTest" />
+    <testcase name="ForeachMutate" status="run" time="0" classname="BoundedHashMapTest" />
+  </testsuite>
+  <testsuite name="BoundedHashmapTest" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Contains" status="run" time="0" classname="BoundedHashmapTest" />
+    <testcase name="Erase" status="run" time="0" classname="BoundedHashmapTest" />
+    <testcase name="Keys" status="run" time="0" classname="BoundedHashmapTest" />
+    <testcase name="Values" status="run" time="0" classname="BoundedHashmapTest" />
+  </testsuite>
+  <testsuite name="BytesTest" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Parse" status="run" time="0" classname="BytesTest" />
+    <testcase name="Arithmetic" status="run" time="0" classname="BytesTest" />
+    <testcase name="Comparison" status="run" time="0" classname="BytesTest" />
+    <testcase name="Stringify" status="run" time="0" classname="BytesTest" />
+  </testsuite>
+  <testsuite name="CacheTest" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Insert" status="run" time="0" classname="CacheTest" />
+    <testcase name="Update" status="run" time="0" classname="CacheTest" />
+    <testcase name="Erase" status="run" time="0" classname="CacheTest" />
+    <testcase name="LRUEviction" status="run" time="0" classname="CacheTest" />
+  </testsuite>
+  <testsuite name="Invoke" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Free" status="run" time="0" classname="Invoke" />
+    <testcase name="Lambda" status="run" time="0" classname="Invoke" />
+    <testcase name="Member" status="run" time="0" classname="Invoke" />
+    <testcase name="FunctionObject" status="run" time="0" classname="Invoke" />
+  </testsuite>
+  <testsuite name="DurationTest" tests="5" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Comparison" status="run" time="0" classname="DurationTest" />
+    <testcase name="ParseAndTry" status="run" time="0" classname="DurationTest" />
+    <testcase name="Arithmetic" status="run" time="0" classname="DurationTest" />
+    <testcase name="OutputFormat" status="run" time="0" classname="DurationTest" />
+    <testcase name="Timeval" status="run" time="0" classname="DurationTest" />
+  </testsuite>
+  <testsuite name="DynamicLibraryTest" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="LoadKnownSymbol" status="run" time="0" classname="DynamicLibraryTest" />
+    <testcase name="FailToLoadInvalidSymbol" status="run" time="0" classname="DynamicLibraryTest" />
+    <testcase name="CloseAndLoadSymbolFailWithoutOpeningLib" status="run" time="0" classname="DynamicLibraryTest" />
+    <testcase name="VerifyClose" status="run" time="0" classname="DynamicLibraryTest" />
+    <testcase name="FailToLoadInvalidLibPath" status="run" time="0" classname="DynamicLibraryTest" />
+    <testcase name="DoubleFailOpen" status="run" time="0" classname="DynamicLibraryTest" />
+    <testcase name="OpenSuccessThenOpenFail" status="run" time="0" classname="DynamicLibraryTest" />
+    <testcase name="OpenFailThenOpenSuccess" status="run" time="0" classname="DynamicLibraryTest" />
+  </testsuite>
+  <testsuite name="ErrorTest" tests="2" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Test" status="run" time="0" classname="ErrorTest" />
+    <testcase name="Errno" status="run" time="0.001" classname="ErrorTest" />
+  </testsuite>
+  <testsuite name="FlagsTest" tests="26" failures="0" disabled="0" errors="0" time="0.005">
+    <testcase name="Load" status="run" time="0" classname="FlagsTest" />
+    <testcase name="Add" status="run" time="0" classname="FlagsTest" />
+    <testcase name="Alias" status="run" time="0" classname="FlagsTest" />
+    <testcase name="Flags" status="run" time="0" classname="FlagsTest" />
+    <testcase name="LoadFromEnvironment" status="run" time="0.001" classname="FlagsTest" />
+    <testcase name="LoadFromCommandLine" status="run" time="0" classname="FlagsTest" />
+    <testcase name="LoadFromCommandLineWithNonFlags" status="run" time="0" classname="FlagsTest" />
+    <testcase name="LoadFromCommandLineWithDashDash" status="run" time="0" classname="FlagsTest" />
+    <testcase name="LoadFromCommandLineAndUpdateArgcArgv" status="run" time="0" classname="FlagsTest" />
+    <testcase name="Stringification" status="run" time="0.001" classname="FlagsTest" />
+    <testcase name="EffectiveName" status="run" time="0" classname="FlagsTest" />
+    <testcase name="DeprecationWarning" status="run" time="0" classname="FlagsTest" />
+    <testcase name="DuplicatesFromEnvironment" status="run" time="0" classname="FlagsTest" />
+    <testcase name="DuplicatesFromCommandLine" status="run" time="0.001" classname="FlagsTest" />
+    <testcase name="AliasDuplicateFromCommandLine" status="run" time="0" classname="FlagsTest" />
+    <testcase name="Errors" status="run" time="0.001" classname="FlagsTest" />
+    <testcase name="MissingRequiredFlag" status="run" time="0" classname="FlagsTest" />
+    <testcase name="Validate" status="run" time="0" classname="FlagsTest" />
+    <testcase name="Usage" status="run" time="0" classname="FlagsTest" />
+    <testcase name="UsageMessage" status="run" time="0" classname="FlagsTest" />
+    <testcase name="EmptyUsage" status="run" time="0" classname="FlagsTest" />
+    <testcase name="ProgramName" status="run" time="0" classname="FlagsTest" />
+    <testcase name="OptionalMessage" status="run" time="0.001" classname="FlagsTest" />
+    <testcase name="BuildEnvironment" status="run" time="0" classname="FlagsTest" />
+    <testcase name="Duration" status="run" time="0" classname="FlagsTest" />
+    <testcase name="JSON" status="run" time="0" classname="FlagsTest" />
+  </testsuite>
+  <testsuite name="FlagsFileTest" tests="2" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="JSONFile" status="run" time="0.001" classname="FlagsFileTest" />
+    <testcase name="FilePrefix" status="run" time="0" classname="FlagsFileTest" />
+  </testsuite>
+  <testsuite name="GzipTest" tests="2" failures="0" disabled="0" errors="0" time="0.164">
+    <testcase name="CompressDecompressString" status="run" time="0.164" classname="GzipTest" />
+    <testcase name="Decompressor" status="run" time="0" classname="GzipTest" />
+  </testsuite>
+  <testsuite name="HashMapTest" tests="6" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="InitializerList" status="run" time="0.001" classname="HashMapTest" />
+    <testcase name="FromStdMap" status="run" time="0" classname="HashMapTest" />
+    <testcase name="FromRValueStdMap" status="run" time="0" classname="HashMapTest" />
+    <testcase name="Insert" status="run" time="0" classname="HashMapTest" />
+    <testcase name="Contains" status="run" time="0" classname="HashMapTest" />
+    <testcase name="CustomHashAndEqual" status="run" time="0" classname="HashMapTest" />
+  </testsuite>
+  <testsuite name="HashsetTest" tests="7" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="InitializerList" status="run" time="0" classname="HashsetTest" />
+    <testcase name="FromStdSet" status="run" time="0" classname="HashsetTest" />
+    <testcase name="FromRValueStdSet" status="run" time="0" classname="HashsetTest" />
+    <testcase name="CustomHashAndEqual" status="run" time="0" classname="HashsetTest" />
+    <testcase name="Insert" status="run" time="0" classname="HashsetTest" />
+    <testcase name="Union" status="run" time="0" classname="HashsetTest" />
+    <testcase name="Difference" status="run" time="0" classname="HashsetTest" />
+  </testsuite>
+  <testsuite name="IntervalTest" tests="13" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Interval" status="run" time="0" classname="IntervalTest" />
+    <testcase name="EmptyInterval" status="run" time="0" classname="IntervalTest" />
+    <testcase name="IntervalEqual" status="run" time="0" classname="IntervalTest" />
+    <testcase name="Constructor" status="run" time="0" classname="IntervalTest" />
+    <testcase name="Contains" status="run" time="0" classname="IntervalTest" />
+    <testcase name="Addition" status="run" time="0" classname="IntervalTest" />
+    <testcase name="Subtraction" status="run" time="0" classname="IntervalTest" />
+    <testcase name="Intersection" status="run" time="0" classname="IntervalTest" />
+    <testcase name="IntersectionTest" status="run" time="0" classname="IntervalTest" />
+    <testcase name="LargeInterval" status="run" time="0" classname="IntervalTest" />
+    <testcase name="IntervalIteration" status="run" time="0" classname="IntervalTest" />
+    <testcase name="Stream" status="run" time="0" classname="IntervalTest" />
+    <testcase name="InfixOperator" status="run" time="0.001" classname="IntervalTest" />
+  </testsuite>
+  <testsuite name="NetTest" tests="9" failures="0" disabled="0" errors="0" time="0.003">
+    <testcase name="LinkDevice" status="run" time="0.001" classname="NetTest" />
+    <testcase name="ConstructIPv4" status="run" time="0" classname="NetTest" />
+    <testcase name="ConstructIPv6" status="run" time="0" classname="NetTest" />
+    <testcase name="ConstructIPv4Network" status="run" time="0" classname="NetTest" />
+    <testcase name="ConstructIPv6Network" status="run" time="0" classname="NetTest" />
+    <testcase name="CopyIPNetwork" status="run" time="0" classname="NetTest" />
+    <testcase name="Mac" status="run" time="0.001" classname="NetTest" />
+    <testcase name="ConstructMAC" status="run" time="0" classname="NetTest" />
+    <testcase name="ParseMAC" status="run" time="0" classname="NetTest" />
+  </testsuite>
+  <testsuite name="JsonTest" tests="20" failures="0" disabled="0" errors="0" time="0.065">
+    <testcase name="DefaultValueIsNull" status="run" time="0" classname="JsonTest" />
+    <testcase name="UTF8" status="run" time="0" classname="JsonTest" />
+    <testcase name="InvalidUTF8" status="run" time="0.001" classname="JsonTest" />
+    <testcase name="NumberFormat" status="run" time="0" classname="JsonTest" />
+    <testcase name="NumberComparisons" status="run" time="0" classname="JsonTest" />
+    <testcase name="BooleanFormat" status="run" time="0" classname="JsonTest" />
+    <testcase name="BooleanAssignement" status="run" time="0" classname="JsonTest" />
+    <testcase name="CStringAssignment" status="run" time="0" classname="JsonTest" />
+    <testcase name="NumericAssignment" status="run" time="0" classname="JsonTest" />
+    <testcase name="Parse" status="run" time="0" classname="JsonTest" />
+    <testcase name="ParseError" status="run" time="0" classname="JsonTest" />
+    <testcase name="Find" status="run" time="0.002" classname="JsonTest" />
+    <testcase name="At" status="run" time="0" classname="JsonTest" />
+    <testcase name="Equals" status="run" time="0" classname="JsonTest" />
+    <testcase name="ContainsArray" status="run" time="0.001" classname="JsonTest" />
+    <testcase name="ContainsBoolean" status="run" time="0" classname="JsonTest" />
+    <testcase name="ContainsNull" status="run" time="0" classname="JsonTest" />
+    <testcase name="ContainsString" status="run" time="0" classname="JsonTest" />
+    <testcase name="ContainsObject" status="run" time="0.001" classname="JsonTest" />
+    <testcase name="NestingDepth" status="run" time="0.06" classname="JsonTest" />
+  </testsuite>
+  <testsuite name="JsonifyTest" tests="17" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Boolean" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="JSONBoolean" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="JSONBooleanValue" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="Number" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="JSONNumber" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="JSONNumberValue" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="String" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="JSONString" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="JSONStringValue" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="Object" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="JSONObject" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="JSONObjectValue" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="Array" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="JSONArray" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="JSONArrayValue" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="Dictionary" status="run" time="0" classname="JsonifyTest" />
+    <testcase name="JSONNull" status="run" time="0" classname="JsonifyTest" />
+  </testsuite>
+  <testsuite name="LambdaTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Map" status="run" time="0" classname="LambdaTest" />
+    <testcase name="Zip" status="run" time="0" classname="LambdaTest" />
+  </testsuite>
+  <testsuite name="PartialTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Test" status="run" time="0" classname="PartialTest" />
+  </testsuite>
+  <testsuite name="LinkedHashmapTest" tests="5" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Put" status="run" time="0" classname="LinkedHashmapTest" />
+    <testcase name="Contains" status="run" time="0" classname="LinkedHashmapTest" />
+    <testcase name="Erase" status="run" time="0" classname="LinkedHashmapTest" />
+    <testcase name="Keys" status="run" time="0" classname="LinkedHashmapTest" />
+    <testcase name="Values" status="run" time="0" classname="LinkedHashmapTest" />
+  </testsuite>
+  <testsuite name="LinkedHashMapTest" tests="5" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Foreach" status="run" time="0" classname="LinkedHashMapTest" />
+    <testcase name="ForeachConst" status="run" time="0" classname="LinkedHashMapTest" />
+    <testcase name="ForeachMutate" status="run" time="0" classname="LinkedHashMapTest" />
+    <testcase name="CopyConstruction" status="run" time="0" classname="LinkedHashMapTest" />
+    <testcase name="Assignment" status="run" time="0" classname="LinkedHashMapTest" />
+  </testsuite>
+  <testsuite name="MultimapTest/0" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="InitializerList" type_param="Multimap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short&gt;" status="run" time="0" classname="MultimapTest/0" />
+    <testcase name="FromMultimap" type_param="Multimap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short&gt;" status="run" time="0" classname="MultimapTest/0" />
+    <testcase name="FromRValueMultimap" type_param="Multimap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short&gt;" status="run" time="0" classname="MultimapTest/0" />
+    <testcase name="Put" type_param="Multimap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short&gt;" status="run" time="0" classname="MultimapTest/0" />
+    <testcase name="Remove" type_param="Multimap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short&gt;" status="run" time="0" classname="MultimapTest/0" />
+    <testcase name="Size" type_param="Multimap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short&gt;" status="run" time="0" classname="MultimapTest/0" />
+    <testcase name="Keys" type_param="Multimap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short&gt;" status="run" time="0" classname="MultimapTest/0" />
+    <testcase name="Foreach" type_param="Multimap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short&gt;" status="run" time="0" classname="MultimapTest/0" />
+  </testsuite>
+  <testsuite name="MultimapTest/1" tests="8" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="InitializerList" type_param="multihashmap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short, std::hash&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;, std::equal_to&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &gt;" status="run" time="0.001" classname="MultimapTest/1" />
+    <testcase name="FromMultimap" type_param="multihashmap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short, std::hash&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;, std::equal_to&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &gt;" status="run" time="0" classname="MultimapTest/1" />
+    <testcase name="FromRValueMultimap" type_param="multihashmap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short, std::hash&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;, std::equal_to&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &gt;" status="run" time="0" classname="MultimapTest/1" />
+    <testcase name="Put" type_param="multihashmap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short, std::hash&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;, std::equal_to&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &gt;" status="run" time="0" classname="MultimapTest/1" />
+    <testcase name="Remove" type_param="multihashmap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short, std::hash&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;, std::equal_to&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &gt;" status="run" time="0" classname="MultimapTest/1" />
+    <testcase name="Size" type_param="multihashmap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short, std::hash&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;, std::equal_to&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &gt;" status="run" time="0" classname="MultimapTest/1" />
+    <testcase name="Keys" type_param="multihashmap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short, std::hash&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;, std::equal_to&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &gt;" status="run" time="0" classname="MultimapTest/1" />
+    <testcase name="Foreach" type_param="multihashmap&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned short, std::hash&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;, std::equal_to&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &gt;" status="run" time="0" classname="MultimapTest/1" />
+  </testsuite>
+  <testsuite name="NoneTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Test" status="run" time="0" classname="NoneTest" />
+  </testsuite>
+  <testsuite name="NumifyTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="DecNumberTest" status="run" time="0" classname="NumifyTest" />
+    <testcase name="HexNumberTest" status="run" time="0" classname="NumifyTest" />
+  </testsuite>
+  <testsuite name="OptionTest" tests="8" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Min" status="run" time="0" classname="OptionTest" />
+    <testcase name="Max" status="run" time="0" classname="OptionTest" />
+    <testcase name="Comparison" status="run" time="0" classname="OptionTest" />
+    <testcase name="NonConstReference" status="run" time="0" classname="OptionTest" />
+    <testcase name="ArrowOperator" status="run" time="0" classname="OptionTest" />
+    <testcase name="NonCopyable" status="run" time="0" classname="OptionTest" />
+    <testcase name="GetOrElse" status="run" time="0" classname="OptionTest" />
+    <testcase name="Hash" status="run" time="0" classname="OptionTest" />
+  </testsuite>
+  <testsuite name="OsTest" tests="22" failures="0" disabled="0" errors="0" time="0.381">
+    <testcase name="Environment" status="run" time="0.001" classname="OsTest" />
+    <testcase name="TrivialEnvironment" status="run" time="0.001" classname="OsTest" />
+    <testcase name="Argv" status="run" time="0" classname="OsTest" />
+    <testcase name="System" status="run" time="0.025" classname="OsTest" />
+    <testcase name="Cloexec" status="run" time="0" classname="OsTest" />
+    <testcase name="Nonblock" status="run" time="0" classname="OsTest" />
+    <testcase name="SYMLINK_Size" status="run" time="0.001" classname="OsTest" />
+    <testcase name="BootId" status="run" time="0" classname="OsTest" />
+    <testcase name="Sleep" status="run" time="0.01" classname="OsTest" />
+    <testcase name="Children" status="run" time="0.071" classname="OsTest" />
+    <testcase name="Killtree" status="run" time="0.131" classname="OsTest" />
+    <testcase name="KilltreeNoRoot" status="run" time="0.076" classname="OsTest" />
+    <testcase name="ProcessExists" status="run" time="0.005" classname="OsTest" />
+    <testcase name="User" status="run" time="0.031" classname="OsTest" />
+    <testcase name="SYMLINK_Chown" status="run" time="0" classname="OsTest" />
+    <testcase name="ChownNoAccess" status="run" time="0" classname="OsTest" />
+    <testcase name="TrivialUser" status="run" time="0.001" classname="OsTest" />
+    <testcase name="Libraries" status="run" time="0" classname="OsTest" />
+    <testcase name="Shell" status="run" time="0.027" classname="OsTest" />
+    <testcase name="Mknod" status="run" time="0" classname="OsTest" />
+    <testcase name="SYMLINK_Realpath" status="run" time="0" classname="OsTest" />
+    <testcase name="Which" status="run" time="0" classname="OsTest" />
+  </testsuite>
+  <testsuite name="PathTest" tests="7" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Basename" status="run" time="0" classname="PathTest" />
+    <testcase name="Dirname" status="run" time="0" classname="PathTest" />
+    <testcase name="Extension" status="run" time="0" classname="PathTest" />
+    <testcase name="Join" status="run" time="0.001" classname="PathTest" />
+    <testcase name="Absolute" status="run" time="0" classname="PathTest" />
+    <testcase name="Comparison" status="run" time="0" classname="PathTest" />
+    <testcase name="FromURI" status="run" time="0" classname="PathTest" />
+  </testsuite>
+  <testsuite name="PathFileTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ImplicitConversion" status="run" time="0" classname="PathFileTest" />
+  </testsuite>
+  <testsuite name="ProtobufTest" tests="12" failures="0" disabled="0" errors="0" time="0.009">
+    <testcase name="JSON" status="run" time="0.005" classname="ProtobufTest" />
+    <testcase name="JSONArray" status="run" time="0" classname="ProtobufTest" />
+    <testcase name="JsonLargeIntegers" status="run" time="0.001" classname="ProtobufTest" />
+    <testcase name="SimpleMessageEquals" status="run" time="0" classname="ProtobufTest" />
+    <testcase name="ParseJSONArray" status="run" time="0" classname="ProtobufTest" />
+    <testcase name="ParseJSONNull" status="run" time="0" classname="ProtobufTest" />
+    <testcase name="ParseJSONNestedError" status="run" time="0" classname="ProtobufTest" />
+    <testcase name="ParseJSONUnrecognizedEnum" status="run" time="0.001" classname="ProtobufTest" />
+    <testcase name="Jsonify" status="run" time="0" classname="ProtobufTest" />
+    <testcase name="JsonifyArray" status="run" time="0" classname="ProtobufTest" />
+    <testcase name="JsonifyLargeIntegers" status="run" time="0" classname="ProtobufTest" />
+    <testcase name="JsonifyMap" status="run" time="0.002" classname="ProtobufTest" />
+  </testsuite>
+  <testsuite name="RecordIOTest" tests="2" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Encoder" status="run" time="0.001" classname="RecordIOTest" />
+    <testcase name="Decoder" status="run" time="0" classname="RecordIOTest" />
+  </testsuite>
+  <testsuite name="ResultTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="TryToResultConversion" status="run" time="0" classname="ResultTest" />
+    <testcase name="ArrowOperator" status="run" time="0" classname="ResultTest" />
+  </testsuite>
+  <testsuite name="SomeTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Some" status="run" time="0" classname="SomeTest" />
+  </testsuite>
+  <testsuite name="StringsTest" tests="40" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Format" status="run" time="0" classname="StringsTest" />
+    <testcase name="Remove" status="run" time="0" classname="StringsTest" />
+    <testcase name="Replace" status="run" time="0" classname="StringsTest" />
+    <testcase name="Trim" status="run" time="0" classname="StringsTest" />
+    <testcase name="Tokenize" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeStringWithDelimsAtStart" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeStringWithDelimsAtEnd" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeStringWithDelimsAtStartAndEnd" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeWithMultipleDelims" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeEmptyString" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeDelimOnlyString" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeNullByteDelim" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeNZero" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeNOne" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeNDelimOnlyString" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeN" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeNStringWithDelimsAtStart" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeNStringWithDelimsAtEnd" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeNStringWithDelimsAtStartAndEnd" status="run" time="0" classname="StringsTest" />
+    <testcase name="TokenizeNWithMultipleDelims" status="run" time="0" classname="StringsTest" />
+    <testcase name="SplitEmptyString" status="run" time="0" classname="StringsTest" />
+    <testcase name="SplitDelimOnlyString" status="run" time="0" classname="StringsTest" />
+    <testcase name="Split" status="run" time="0" classname="StringsTest" />
+    <testcase name="SplitStringWithDelimsAtStart" status="run" time="0" classname="StringsTest" />
+    <testcase name="SplitStringWithDelimsAtEnd" status="run" time="0" classname="StringsTest" />
+    <testcase name="SplitStringWithDelimsAtStartAndEnd" status="run" time="0" classname="StringsTest" />
+    <testcase name="SplitWithMultipleDelims" status="run" time="0" classname="StringsTest" />
+    <testcase name="SplitNZero" status="run" time="0" classname="StringsTest" />
+    <testcase name="SplitNOne" status="run" time="0" classname="StringsTest" />
+    <testcase name="SplitNDelimOnlyString" status="run" time="0.001" classname="StringsTest" />
+    <testcase name="SplitN" status="run" time="0" classname="StringsTest" />
+    <testcase name="SplitNStringWithDelimsAtStart" status="run" time="0" classname="StringsTest" />
+    <testcase name="SplitNStringWithDelimsAtEnd" status="run" time="0" classname="StringsTest" />
+    <testcase name="SplitNStringWithDelimsAtStartAndEnd" status="run" time="0" classname="StringsTest" />
+    <testcase name="SplitNWithMultipleDelims" status="run" time="0" classname="StringsTest" />
+    <testcase name="Pairs" status="run" time="0" classname="StringsTest" />
+    <testcase name="Join" status="run" time="0" classname="StringsTest" />
+    <testcase name="StartsWith" status="run" time="0" classname="StringsTest" />
+    <testcase name="EndsWith" status="run" time="0" classname="StringsTest" />
+    <testcase name="Contains" status="run" time="0" classname="StringsTest" />
+  </testsuite>
+  <testsuite name="SubcommandTest" tests="2" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Flags" status="run" time="0" classname="SubcommandTest" />
+    <testcase name="Dispatch" status="run" time="0.001" classname="SubcommandTest" />
+  </testsuite>
+  <testsuite name="TryTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ArrowOperator" status="run" time="0" classname="TryTest" />
+  </testsuite>
+  <testsuite name="UriTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="TestUriFromPath" status="run" time="0" classname="UriTest" />
+  </testsuite>
+  <testsuite name="UUIDTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Test" status="run" time="0" classname="UUIDTest" />
+    <testcase name="Metadata" status="run" time="0" classname="UUIDTest" />
+    <testcase name="MalformedUUID" status="run" time="0" classname="UUIDTest" />
+  </testsuite>
+  <testsuite name="VariantTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Visit" status="run" time="0" classname="VariantTest" />
+    <testcase name="Equality" status="run" time="0" classname="VariantTest" />
+  </testsuite>
+  <testsuite name="VersionTest" tests="4" failures="0" disabled="0" errors="0" time="0.004">
+    <testcase name="Comparison" status="run" time="0.003" classname="VersionTest" />
+    <testcase name="BuildMetadataComparison" status="run" time="0" classname="VersionTest" />
+    <testcase name="ParseValid" status="run" time="0.001" classname="VersionTest" />
+    <testcase name="ParseInvalid" status="run" time="0" classname="VersionTest" />
+  </testsuite>
+  <testsuite name="SVNTest" tests="2" failures="0" disabled="0" errors="0" time="0.148">
+    <testcase name="DiffPatch" status="run" time="0.077" classname="SVNTest" />
+    <testcase name="EmptyDiffPatch" status="run" time="0.07" classname="SVNTest" />
+  </testsuite>
+  <testsuite name="ProcTest" tests="6" failures="0" disabled="0" errors="0" time="0.017">
+    <testcase name="Pids" status="run" time="0.002" classname="ProcTest" />
+    <testcase name="Cpus" status="run" time="0.014" classname="ProcTest" />
+    <testcase name="SystemStatus" status="run" time="0" classname="ProcTest" />
+    <testcase name="ProcessStatus" status="run" time="0" classname="ProcTest" />
+    <testcase name="SingleThread" status="run" time="0" classname="ProcTest" />
+    <testcase name="MultipleThreads" status="run" time="0.001" classname="ProcTest" />
+  </testsuite>
+  <testsuite name="CopyFileTest" tests="4" failures="0" disabled="0" errors="0" time="0.006">
+    <testcase name="CopyWithAbsolutePath" status="run" time="0.005" classname="CopyFileTest" />
+    <testcase name="CopyToDirectoryDestinationFails" status="run" time="0.001" classname="CopyFileTest" />
+    <testcase name="DestinationEndsInSlashFails" status="run" time="0" classname="CopyFileTest" />
+    <testcase name="CopyToRelativeFilenameFails" status="run" time="0" classname="CopyFileTest" />
+  </testsuite>
+  <testsuite name="EnvTest" tests="2" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="SimpleEnvTest" status="run" time="0" classname="EnvTest" />
+    <testcase name="EraseEnv" status="run" time="0.001" classname="EnvTest" />
+  </testsuite>
+  <testsuite name="FsTest" tests="16" failures="0" disabled="0" errors="0" time="0.007">
+    <testcase name="Find" status="run" time="0.001" classname="FsTest" />
+    <testcase name="ReadWriteString" status="run" time="0" classname="FsTest" />
+    <testcase name="Mkdir" status="run" time="0.001" classname="FsTest" />
+    <testcase name="Exists" status="run" time="0" classname="FsTest" />
+    <testcase name="Touch" status="run" time="0" classname="FsTest" />
+    <testcase name="CreateDirectoryAtMaxPath" status="run" time="0" classname="FsTest" />
+    <testcase name="CreateDirectoryLongerThanMaxPath" status="run" time="0.001" classname="FsTest" />
+    <testcase name="RealpathValidationOnOpenFile" status="run" time="0" classname="FsTest" />
+    <testcase name="SYMLINK_Symlink" status="run" time="0" classname="FsTest" />
+    <testcase name="SYMLINK_Rm" status="run" time="0" classname="FsTest" />
+    <testcase name="List" status="run" time="0" classname="FsTest" />
+    <testcase name="Rename" status="run" time="0.001" classname="FsTest" />
+    <testcase name="Open" status="run" time="0.002" classname="FsTest" />
+    <testcase name="Close" status="run" time="0" classname="FsTest" />
+    <testcase name="Xattr" status="run" time="0.001" classname="FsTest" />
+    <testcase name="Used" status="run" time="0" classname="FsTest" />
+  </testsuite>
+  <testsuite name="ProcessTest" tests="4" failures="0" disabled="0" errors="0" time="0.117">
+    <testcase name="Process" status="run" time="0" classname="ProcessTest" />
+    <testcase name="Processes" status="run" time="0.018" classname="ProcessTest" />
+    <testcase name="Pids" status="run" time="0.049" classname="ProcessTest" />
+    <testcase name="Pstree" status="run" time="0.05" classname="ProcessTest" />
+  </testsuite>
+  <testsuite name="RmdirTest" tests="12" failures="0" disabled="0" errors="0" time="0.006">
+    <testcase name="TrivialRemoveEmptyDirectoryAbsolutePath" status="run" time="0" classname="RmdirTest" />
+    <testcase name="TrivialRemoveEmptyDirectoryRelativePath" status="run" time="0" classname="RmdirTest" />
+    <testcase name="RemoveFile" status="run" time="0.001" classname="RmdirTest" />
+    <testcase name="RemoveRecursiveByDefault" status="run" time="0" classname="RmdirTest" />
+    <testcase name="TrivialFailToRemoveInvalidPath" status="run" time="0" classname="RmdirTest" />
+    <testcase name="FailToRemoveNestedInvalidPath" status="run" time="0.001" classname="RmdirTest" />
+    <testcase name="RemoveDirectoryWithDeviceFile" status="run" time="0" classname="RmdirTest" />
+    <testcase name="SYMLINK_RmDirNoTargetSymbolicLink" status="run" time="0.001" classname="RmdirTest" />
+    <testcase name="SYMLINK_RemoveDirectoryHangingSymlink" status="run" time="0" classname="RmdirTest" />
+    <testcase name="SYMLINK_RemoveDirectoryWithSymbolicLinkTargetDirectory" status="run" time="0.001" classname="RmdirTest" />
+    <testcase name="SYMLINK_RemoveDirectoryWithSymbolicLinkTargetFile" status="run" time="0" classname="RmdirTest" />
+    <testcase name="RemoveDirectoryButPreserveRoot" status="run" time="0.001" classname="RmdirTest" />
+  </testsuite>
+  <testsuite name="RmdirContinueOnErrorTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="RemoveWithContinueOnError" status="run" time="0" classname="RmdirContinueOnErrorTest" />
+  </testsuite>
+  <testsuite name="StrerrorTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ValidErrno" status="run" time="0" classname="StrerrorTest" />
+    <testcase name="InvalidErrno" status="run" time="0" classname="StrerrorTest" />
+    <testcase name="ValidHerrno" status="run" time="0" classname="StrerrorTest" />
+  </testsuite>
+  <testsuite name="OsSendfileTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Sendfile" status="run" time="0.001" classname="OsSendfileTest" />
+  </testsuite>
+  <testsuite name="OsSignalsTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Suppress" status="run" time="0" classname="OsSignalsTest" />
+  </testsuite>
+  <testsuite name="SystemsTests" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Uname" status="run" time="0" classname="SystemsTests" />
+    <testcase name="Sysname" status="run" time="0" classname="SystemsTests" />
+    <testcase name="Release" status="run" time="0" classname="SystemsTests" />
+  </testsuite>
+</testsuites>

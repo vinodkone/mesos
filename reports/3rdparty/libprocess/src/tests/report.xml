@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="248" failures="0" disabled="2" errors="0" timestamp="2018-11-07T11:11:08" time="1.477" name="AllTests">
+  <testsuite name="AfterTest" tests="2" failures="0" disabled="0" errors="0" time="0.004">
+    <testcase name="After" status="run" time="0.003" classname="AfterTest" />
+    <testcase name="Loop" status="run" time="0.001" classname="AfterTest" />
+  </testsuite>
+  <testsuite name="CollectTest" tests="4" failures="0" disabled="0" errors="0" time="0.004">
+    <testcase name="Ready" status="run" time="0.001" classname="CollectTest" />
+    <testcase name="Failure" status="run" time="0.002" classname="CollectTest" />
+    <testcase name="DiscardPropagation" status="run" time="0" classname="CollectTest" />
+    <testcase name="AbandonedPropagation" status="run" time="0.001" classname="CollectTest" />
+  </testsuite>
+  <testsuite name="AwaitTest" tests="7" failures="0" disabled="0" errors="0" time="0.004">
+    <testcase name="Success" status="run" time="0" classname="AwaitTest" />
+    <testcase name="Failure" status="run" time="0" classname="AwaitTest" />
+    <testcase name="Discarded" status="run" time="0" classname="AwaitTest" />
+    <testcase name="DiscardPropagation" status="run" time="0" classname="AwaitTest" />
+    <testcase name="AbandonedPropagation" status="run" time="0.001" classname="AwaitTest" />
+    <testcase name="AwaitSingleDiscard" status="run" time="0" classname="AwaitTest" />
+    <testcase name="AwaitSingleAbandon" status="run" time="0" classname="AwaitTest" />
+  </testsuite>
+  <testsuite name="CountDownLatchTest" tests="2" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Triggered" status="run" time="0" classname="CountDownLatchTest" />
+    <testcase name="Threads" status="run" time="0.001" classname="CountDownLatchTest" />
+  </testsuite>
+  <testsuite name="RequestDecoderTest/0" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Request" type_param="process::DataDecoder" status="run" time="0" classname="RequestDecoderTest/0" />
+    <testcase name="HeaderContinuation" type_param="process::DataDecoder" status="run" time="0" classname="RequestDecoderTest/0" />
+    <testcase name="HeaderCaseInsensitive" type_param="process::DataDecoder" status="run" time="0" classname="RequestDecoderTest/0" />
+    <testcase name="InvalidQueryArgs" type_param="process::DataDecoder" status="run" time="0" classname="RequestDecoderTest/0" />
+  </testsuite>
+  <testsuite name="RequestDecoderTest/1" tests="4" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Request" type_param="process::StreamingRequestDecoder" status="run" time="0" classname="RequestDecoderTest/1" />
+    <testcase name="HeaderContinuation" type_param="process::StreamingRequestDecoder" status="run" time="0" classname="RequestDecoderTest/1" />
+    <testcase name="HeaderCaseInsensitive" type_param="process::StreamingRequestDecoder" status="run" time="0.001" classname="RequestDecoderTest/1" />
+    <testcase name="InvalidQueryArgs" type_param="process::StreamingRequestDecoder" status="run" time="0" classname="RequestDecoderTest/1" />
+  </testsuite>
+  <testsuite name="DecoderTest" tests="5" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Response" status="run" time="0" classname="DecoderTest" />
+    <testcase name="ResponseWithUnspecifiedLength" status="run" time="0" classname="DecoderTest" />
+    <testcase name="StreamingResponse" status="run" time="0" classname="DecoderTest" />
+    <testcase name="StreamingResponseFailure" status="run" time="0" classname="DecoderTest" />
+    <testcase name="StreamingResponseInvalidHeader" status="run" time="0" classname="DecoderTest" />
+  </testsuite>
+  <testsuite name="EncoderTest" tests="2" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Response" status="run" time="0" classname="EncoderTest" />
+    <testcase name="AcceptableEncodings" status="run" time="0.001" classname="EncoderTest" />
+  </testsuite>
+  <testsuite name="FutureTest" tests="26" failures="0" disabled="0" errors="0" time="0.008">
+    <testcase name="Future" status="run" time="0" classname="FutureTest" />
+    <testcase name="Stringify" status="run" time="0" classname="FutureTest" />
+    <testcase name="Associate" status="run" time="0" classname="FutureTest" />
+    <testcase name="OnAny" status="run" time="0" classname="FutureTest" />
+    <testcase name="Then" status="run" time="0" classname="FutureTest" />
+    <testcase name="CallableOnce" status="run" time="0" classname="FutureTest" />
+    <testcase name="Repair" status="run" time="0" classname="FutureTest" />
+    <testcase name="After1" status="run" time="0.002" classname="FutureTest" />
+    <testcase name="After2" status="run" time="0.001" classname="FutureTest" />
+    <testcase name="After3" status="run" time="0.001" classname="FutureTest" />
+    <testcase name="Chain" status="run" time="0" classname="FutureTest" />
+    <testcase name="Discard1" status="run" time="0.001" classname="FutureTest" />
+    <testcase name="Discard2" status="run" time="0" classname="FutureTest" />
+    <testcase name="Discard3" status="run" time="0" classname="FutureTest" />
+    <testcase name="Select" status="run" time="0" classname="FutureTest" />
+    <testcase name="FromTry" status="run" time="0" classname="FutureTest" />
+    <testcase name="FromTryFuture" status="run" time="0" classname="FutureTest" />
+    <testcase name="ArrowOperator" status="run" time="0" classname="FutureTest" />
+    <testcase name="UndiscardableFuture" status="run" time="0" classname="FutureTest" />
+    <testcase name="UndiscardableLambda" status="run" time="0" classname="FutureTest" />
+    <testcase name="Abandoned" status="run" time="0" classname="FutureTest" />
+    <testcase name="AbandonedChain" status="run" time="0" classname="FutureTest" />
+    <testcase name="RecoverDiscarded" status="run" time="0.001" classname="FutureTest" />
+    <testcase name="RecoverFailed" status="run" time="0" classname="FutureTest" />
+    <testcase name="RecoverAbandoned" status="run" time="0" classname="FutureTest" />
+    <testcase name="RecoverDiscard" status="run" time="0" classname="FutureTest" />
+  </testsuite>
+  <testsuite name="GRPCClientTest" tests="8" failures="0" disabled="0" errors="0" time="0.323">
+    <testcase name="Success" status="run" time="0.003" classname="GRPCClientTest" />
+    <testcase name="ConcurrentRPCs" status="run" time="0.004" classname="GRPCClientTest" />
+    <testcase name="StatusError" status="run" time="0.003" classname="GRPCClientTest" />
+    <testcase name="DiscardedBeforeServerStarted" status="run" time="0.002" classname="GRPCClientTest" />
+    <testcase name="DiscardedWhenServerProcessing" status="run" time="0.001" classname="GRPCClientTest" />
+    <testcase name="ClientShutdown" status="run" time="0.104" classname="GRPCClientTest" />
+    <testcase name="ServerUnreachable" status="run" time="0.102" classname="GRPCClientTest" />
+    <testcase name="ServerTimeout" status="run" time="0.104" classname="GRPCClientTest" />
+  </testsuite>
+  <testsuite name="HTTPTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="PipeReadAll" status="run" time="0" classname="HTTPTest" />
+  </testsuite>
+  <testsuite name="HTTPConnectionTest" tests="8" failures="0" disabled="0" errors="0" time="0.081">
+    <testcase name="GzipRequestBody" status="run" time="0.008" classname="HTTPConnectionTest" />
+    <testcase name="Serial" status="run" time="0.05" classname="HTTPConnectionTest" />
+    <testcase name="Pipeline" status="run" time="0.008" classname="HTTPConnectionTest" />
+    <testcase name="ClosingRequest" status="run" time="0.003" classname="HTTPConnectionTest" />
+    <testcase name="ClosingResponse" status="run" time="0.004" classname="HTTPConnectionTest" />
+    <testcase name="ReferenceCounting" status="run" time="0.002" classname="HTTPConnectionTest" />
+    <testcase name="Equality" status="run" time="0.003" classname="HTTPConnectionTest" />
+    <testcase name="RequestStreaming" status="run" time="0.003" classname="HTTPConnectionTest" />
+  </testsuite>
+  <testsuite name="URLTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Stringification" status="run" time="0" classname="URLTest" />
+    <testcase name="ParseUrls" status="run" time="0" classname="URLTest" />
+  </testsuite>
+  <testsuite name="HttpAuthenticationTest" tests="7" failures="0" disabled="0" errors="0" time="0.039">
+    <testcase name="NoAuthenticator" status="run" time="0.004" classname="HttpAuthenticationTest" />
+    <testcase name="Unauthorized" status="run" time="0.004" classname="HttpAuthenticationTest" />
+    <testcase name="Forbidden" status="run" time="0.003" classname="HttpAuthenticationTest" />
+    <testcase name="Authenticated" status="run" time="0.002" classname="HttpAuthenticationTest" />
+    <testcase name="InvalidPrincipal" status="run" time="0.004" classname="HttpAuthenticationTest" />
+    <testcase name="Pipelining" status="run" time="0.005" classname="HttpAuthenticationTest" />
+    <testcase name="Basic" status="run" time="0.016" classname="HttpAuthenticationTest" />
+  </testsuite>
+  <testsuite name="HttpServeTest" tests="3" failures="0" disabled="0" errors="0" time="0.02">
+    <testcase name="Pipelining" status="run" time="0.011" classname="HttpServeTest" />
+    <testcase name="Discard" status="run" time="0.006" classname="HttpServeTest" />
+    <testcase name="Unix" status="run" time="0.003" classname="HttpServeTest" />
+  </testsuite>
+  <testsuite name="HttpServerTest" tests="4" failures="0" disabled="0" errors="0" time="0.018">
+    <testcase name="Pipeline" status="run" time="0.012" classname="HttpServerTest" />
+    <testcase name="StopNotRunning" status="run" time="0" classname="HttpServerTest" />
+    <testcase name="Discard" status="run" time="0.004" classname="HttpServerTest" />
+    <testcase name="Finalize" status="run" time="0.002" classname="HttpServerTest" />
+  </testsuite>
+  <testsuite name="IOTest" tests="6" failures="0" disabled="1" errors="0" time="0.134">
+    <testcase name="Poll" status="run" time="0" classname="IOTest" />
+    <testcase name="Read" status="run" time="0.003" classname="IOTest" />
+    <testcase name="BufferedRead" status="run" time="0.005" classname="IOTest" />
+    <testcase name="Write" status="run" time="0.001" classname="IOTest" />
+    <testcase name="DISABLED_BlockingWrite" status="notrun" time="0" classname="IOTest" />
+    <testcase name="Redirect" status="run" time="0.125" classname="IOTest" />
+  </testsuite>
+  <testsuite name="LimiterTest" tests="3" failures="0" disabled="0" errors="0" time="0.008">
+    <testcase name="Acquire" status="run" time="0.003" classname="LimiterTest" />
+    <testcase name="DiscardMiddle" status="run" time="0.003" classname="LimiterTest" />
+    <testcase name="DiscardLast" status="run" time="0.002" classname="LimiterTest" />
+  </testsuite>
+  <testsuite name="LoopTest" tests="4" failures="0" disabled="0" errors="0" time="0.002">
+    <testcase name="Sync" status="run" time="0" classname="LoopTest" />
+    <testcase name="Async" status="run" time="0.001" classname="LoopTest" />
+    <testcase name="DiscardIterate" status="run" time="0" classname="LoopTest" />
+    <testcase name="DiscardBody" status="run" time="0.001" classname="LoopTest" />
+  </testsuite>
+  <testsuite name="MetricsTest" tests="11" failures="0" disabled="0" errors="0" time="0.103">
+    <testcase name="Counter" status="run" time="0.001" classname="MetricsTest" />
+    <testcase name="PullGauge" status="run" time="0" classname="MetricsTest" />
+    <testcase name="PushGauge" status="run" time="0.001" classname="MetricsTest" />
+    <testcase name="Statistics" status="run" time="0.001" classname="MetricsTest" />
+    <testcase name="THREADSAFE_Snapshot" status="run" time="0.024" classname="MetricsTest" />
+    <testcase name="SnapshotAlphabetical" status="run" time="0.012" classname="MetricsTest" />
+    <testcase name="THREADSAFE_SnapshotTimeout" status="run" time="0.039" classname="MetricsTest" />
+    <testcase name="SnapshotStatistics" status="run" time="0.011" classname="MetricsTest" />
+    <testcase name="Timer" status="run" time="0" classname="MetricsTest" />
+    <testcase name="AsyncTimer" status="run" time="0.002" classname="MetricsTest" />
+    <testcase name="THREADSAFE_SnapshotAuthenticationEnabled" status="run" time="0.011" classname="MetricsTest" />
+  </testsuite>
+  <testsuite name="MpscLinkedQueueTest" tests="5" failures="0" disabled="0" errors="0" time="0.022">
+    <testcase name="EnqueueDequeue" status="run" time="0" classname="MpscLinkedQueueTest" />
+    <testcase name="EnqueueDequeueMultiple" status="run" time="0" classname="MpscLinkedQueueTest" />
+    <testcase name="EnqueueDequeueMultithreaded" status="run" time="0.021" classname="MpscLinkedQueueTest" />
+    <testcase name="ForEach" status="run" time="0.001" classname="MpscLinkedQueueTest" />
+    <testcase name="Empty" status="run" time="0" classname="MpscLinkedQueueTest" />
+  </testsuite>
+  <testsuite name="MutexTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Lock" status="run" time="0" classname="MutexTest" />
+    <testcase name="Block" status="run" time="0" classname="MutexTest" />
+    <testcase name="Queue" status="run" time="0" classname="MutexTest" />
+  </testsuite>
+  <testsuite name="OwnedTest" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Access" status="run" time="0" classname="OwnedTest" />
+    <testcase name="Null" status="run" time="0" classname="OwnedTest" />
+    <testcase name="Share" status="run" time="0" classname="OwnedTest" />
+    <testcase name="Release" status="run" time="0" classname="OwnedTest" />
+  </testsuite>
+  <testsuite name="ProcessTest" tests="33" failures="0" disabled="0" errors="0" time="0.097">
+    <testcase name="Event" status="run" time="0" classname="ProcessTest" />
+    <testcase name="Spawn" status="run" time="0.002" classname="ProcessTest" />
+    <testcase name="Dispatch" status="run" time="0" classname="ProcessTest" />
+    <testcase name="Defer1" status="run" time="0.002" classname="ProcessTest" />
+    <testcase name="Defer2" status="run" time="0.001" classname="ProcessTest" />
+    <testcase name="Defer3" status="run" time="0" classname="ProcessTest" />
+    <testcase name="Handlers" status="run" time="0.001" classname="ProcessTest" />
+    <testcase name="Expect" status="run" time="0.001" classname="ProcessTest" />
+    <testcase name="Action" status="run" time="0.001" classname="ProcessTest" />
+    <testcase name="Inheritance" status="run" time="0" classname="ProcessTest" />
+    <testcase name="Thunk" status="run" time="0" classname="ProcessTest" />
+    <testcase name="Delegate" status="run" time="0.001" classname="ProcessTest" />
+    <testcase name="Delay" status="run" time="0.001" classname="ProcessTest" />
+    <testcase name="Order" status="run" time="0" classname="ProcessTest" />
+    <testcase name="Donate" status="run" time="0.001" classname="ProcessTest" />
+    <testcase name="Exited" status="run" time="0" classname="ProcessTest" />
+    <testcase name="InjectExited" status="run" time="0" classname="ProcessTest" />
+    <testcase name="FutureExited" status="run" time="0.001" classname="ProcessTest" />
+    <testcase name="DropExited" status="run" time="0.001" classname="ProcessTest" />
+    <testcase name="Settle" status="run" time="0.032" classname="ProcessTest" />
+    <testcase name="Pid" status="run" time="0" classname="ProcessTest" />
+    <testcase name="Listener" status="run" time="0.001" classname="ProcessTest" />
+    <testcase name="Executor_Defer" status="run" time="0.001" classname="ProcessTest" />
+    <testcase name="Executor_Execute" status="run" time="0.001" classname="ProcessTest" />
+    <testcase name="Remote" status="run" time="0.003" classname="ProcessTest" />
+    <testcase name="Http1" status="run" time="0.005" classname="ProcessTest" />
+    <testcase name="Http2" status="run" time="0.005" classname="ProcessTest" />
+    <testcase name="Async" status="run" time="0.001" classname="ProcessTest" />
+    <testcase name="Provide" status="run" time="0.001" classname="ProcessTest" />
+    <testcase name="Defers" status="run" time="0" classname="ProcessTest" />
+    <testcase name="PercentEncodedURLs" status="run" time="0.007" classname="ProcessTest" />
+    <testcase name="FirewallDisablePaths" status="run" time="0.016" classname="ProcessTest" />
+    <testcase name="FirewallUninstall" status="run" time="0.01" classname="ProcessTest" />
+  </testsuite>
+  <testsuite name="ProcessRemoteLinkTest" tests="7" failures="0" disabled="0" errors="0" time="0.319">
+    <testcase name="RemoteLink" status="run" time="0.039" classname="ProcessRemoteLinkTest" />
+    <testcase name="RemoteRelink" status="run" time="0.046" classname="ProcessRemoteLinkTest" />
+    <testcase name="RemoteLinkRelink" status="run" time="0.03" classname="ProcessRemoteLinkTest" />
+    <testcase name="RemoteDoubleLinkRelink" status="run" time="0.039" classname="ProcessRemoteLinkTest" />
+    <testcase name="RemoteLinkLeak" status="run" time="0.088" classname="ProcessRemoteLinkTest" />
+    <testcase name="RemoteUseStaleLink" status="run" time="0.033" classname="ProcessRemoteLinkTest" />
+    <testcase name="RemoteStaleLinkRelink" status="run" time="0.044" classname="ProcessRemoteLinkTest" />
+  </testsuite>
+  <testsuite name="ProfilerTest" tests="2" failures="0" disabled="0" errors="0" time="0.015">
+    <testcase name="StartAndStop" status="run" time="0.007" classname="ProfilerTest" />
+    <testcase name="StartAndStopAuthenticationEnabled" status="run" time="0.008" classname="ProfilerTest" />
+  </testsuite>
+  <testsuite name="QueueTest" tests="4" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Block" status="run" time="0" classname="QueueTest" />
+    <testcase name="Noblock" status="run" time="0" classname="QueueTest" />
+    <testcase name="Queue" status="run" time="0" classname="QueueTest" />
+    <testcase name="Discard" status="run" time="0.001" classname="QueueTest" />
+  </testsuite>
+  <testsuite name="ReadWriteLockTest" tests="5" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="LockWhenUnlocked" status="run" time="0" classname="ReadWriteLockTest" />
+    <testcase name="BlockReads" status="run" time="0" classname="ReadWriteLockTest" />
+    <testcase name="BlockWrites" status="run" time="0" classname="ReadWriteLockTest" />
+    <testcase name="ConcurrentReads" status="run" time="0" classname="ReadWriteLockTest" />
+    <testcase name="NoStarvation" status="run" time="0" classname="ReadWriteLockTest" />
+  </testsuite>
+  <testsuite name="SequenceTest" tests="4" failures="0" disabled="0" errors="0" time="0.01">
+    <testcase name="Serialize" status="run" time="0.001" classname="SequenceTest" />
+    <testcase name="DiscardOne" status="run" time="0.001" classname="SequenceTest" />
+    <testcase name="DiscardAll" status="run" time="0.001" classname="SequenceTest" />
+    <testcase name="Random" status="run" time="0.007" classname="SequenceTest" />
+  </testsuite>
+  <testsuite name="SharedTest" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="ConstAccess" status="run" time="0" classname="SharedTest" />
+    <testcase name="Null" status="run" time="0" classname="SharedTest" />
+    <testcase name="Reset" status="run" time="0" classname="SharedTest" />
+    <testcase name="Own" status="run" time="0" classname="SharedTest" />
+  </testsuite>
+  <testsuite name="SocketTest" tests="1" failures="0" disabled="0" errors="0" time="0.002">
+    <testcase name="Unix" status="run" time="0.002" classname="SocketTest" />
+  </testsuite>
+  <testsuite name="StateMachineTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Transition" status="run" time="0" classname="StateMachineTest" />
+    <testcase name="Is" status="run" time="0" classname="StateMachineTest" />
+    <testcase name="When" status="run" time="0" classname="StateMachineTest" />
+  </testsuite>
+  <testsuite name="StatisticsTest" tests="4" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Empty" status="run" time="0" classname="StatisticsTest" />
+    <testcase name="Single" status="run" time="0" classname="StatisticsTest" />
+    <testcase name="StatisticsFromTimeSeries" status="run" time="0" classname="StatisticsTest" />
+    <testcase name="StatisticsFromDurationList" status="run" time="0" classname="StatisticsTest" />
+  </testsuite>
+  <testsuite name="SubprocessTest" tests="18" failures="0" disabled="0" errors="0" time="0.156">
+    <testcase name="PipeOutputToFileDescriptor" status="run" time="0.011" classname="SubprocessTest" />
+    <testcase name="PipeOutputToPath" status="run" time="0.01" classname="SubprocessTest" />
+    <testcase name="EnvironmentEcho" status="run" time="0.004" classname="SubprocessTest" />
+    <testcase name="Status" status="run" time="0.017" classname="SubprocessTest" />
+    <testcase name="PipeOutput" status="run" time="0.014" classname="SubprocessTest" />
+    <testcase name="PipeLargeOutput" status="run" time="0.009" classname="SubprocessTest" />
+    <testcase name="PipeInput" status="run" time="0.007" classname="SubprocessTest" />
+    <testcase name="PipeRedirect" status="run" time="0.008" classname="SubprocessTest" />
+    <testcase name="PathOutput" status="run" time="0.012" classname="SubprocessTest" />
+    <testcase name="PathInput" status="run" time="0.005" classname="SubprocessTest" />
+    <testcase name="FdOutput" status="run" time="0.012" classname="SubprocessTest" />
+    <testcase name="FdInput" status="run" time="0.007" classname="SubprocessTest" />
+    <testcase name="Default" status="run" time="0.007" classname="SubprocessTest" />
+    <testcase name="Flags" status="run" time="0.005" classname="SubprocessTest" />
+    <testcase name="Environment" status="run" time="0.01" classname="SubprocessTest" />
+    <testcase name="EnvironmentWithSpaces" status="run" time="0.006" classname="SubprocessTest" />
+    <testcase name="EnvironmentWithSpacesAndQuotes" status="run" time="0.006" classname="SubprocessTest" />
+    <testcase name="EnvironmentOverride" status="run" time="0.006" classname="SubprocessTest" />
+  </testsuite>
+  <testsuite name="SystemTest" tests="1" failures="0" disabled="1" errors="0" time="0">
+    <testcase name="DISABLED_Metrics" status="notrun" time="0" classname="SystemTest" />
+  </testsuite>
+  <testsuite name="TimeTest" tests="5" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Arithmetic" status="run" time="0" classname="TimeTest" />
+    <testcase name="Now" status="run" time="0.001" classname="TimeTest" />
+    <testcase name="RFC1123Output" status="run" time="0" classname="TimeTest" />
+    <testcase name="RFC3339Output" status="run" time="0" classname="TimeTest" />
+    <testcase name="Output" status="run" time="0" classname="TimeTest" />
+  </testsuite>
+  <testsuite name="TimeSeriesTest" tests="3" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="Set" status="run" time="0" classname="TimeSeriesTest" />
+    <testcase name="Sparsify" status="run" time="0.001" classname="TimeSeriesTest" />
+    <testcase name="Truncate" status="run" time="0" classname="TimeSeriesTest" />
+  </testsuite>
+  <testsuite name="ReapTest" tests="3" failures="0" disabled="0" errors="0" time="0.015">
+    <testcase name="NonChildProcess" status="run" time="0.007" classname="ReapTest" />
+    <testcase name="ChildProcess" status="run" time="0.004" classname="ReapTest" />
+    <testcase name="TerminatedChildProcess" status="run" time="0.004" classname="ReapTest" />
+  </testsuite>
+  <testsuite name="Scheme/HTTPTest" tests="24" failures="0" disabled="0" errors="0" time="0.083">
+    <testcase name="Statuses/0" value_param="&quot;http&quot;" status="run" time="0" classname="Scheme/HTTPTest" />
+    <testcase name="Endpoints/0" value_param="&quot;http&quot;" status="run" time="0.015" classname="Scheme/HTTPTest" />
+    <testcase name="EndpointsHelp/0" value_param="&quot;http&quot;" status="run" time="0.017" classname="Scheme/HTTPTest" />
+    <testcase name="EndpointsHelpRemoval/0" value_param="&quot;http&quot;" status="run" time="0.008" classname="Scheme/HTTPTest" />
+    <testcase name="PipeEOF/0" value_param="&quot;http&quot;" status="run" time="0.001" classname="Scheme/HTTPTest" />
+    <testcase name="PipeFailure/0" value_param="&quot;http&quot;" status="run" time="0" classname="Scheme/HTTPTest" />
+    <testcase name="PipeReaderCloses/0" value_param="&quot;http&quot;" status="run" time="0" classname="Scheme/HTTPTest" />
+    <testcase name="Encode/0" value_param="&quot;http&quot;" status="run" time="0" classname="Scheme/HTTPTest" />
+    <testcase name="EncodeAdditionalChars/0" value_param="&quot;http&quot;" status="run" time="0" classname="Scheme/HTTPTest" />
+    <testcase name="QueryEncoding/0" value_param="&quot;http&quot;" status="run" time="0.001" classname="Scheme/HTTPTest" />
+    <testcase name="PathParse/0" value_param="&quot;http&quot;" status="run" time="0" classname="Scheme/HTTPTest" />
+    <testcase name="Get/0" value_param="&quot;http&quot;" status="run" time="0.005" classname="Scheme/HTTPTest" />
+    <testcase name="NestedGet/0" value_param="&quot;http&quot;" status="run" time="0.007" classname="Scheme/HTTPTest" />
+    <testcase name="StreamingGetComplete/0" value_param="&quot;http&quot;" status="run" time="0.006" classname="Scheme/HTTPTest" />
+    <testcase name="StreamingGetFailure/0" value_param="&quot;http&quot;" status="run" time="0.006" classname="Scheme/HTTPTest" />
+    <testcase name="PipeEquality/0" value_param="&quot;http&quot;" status="run" time="0" classname="Scheme/HTTPTest" />
+    <testcase name="Post/0" value_param="&quot;http&quot;" status="run" time="0.007" classname="Scheme/HTTPTest" />
+    <testcase name="Delete/0" value_param="&quot;http&quot;" status="run" time="0.004" classname="Scheme/HTTPTest" />
+    <testcase name="Request/0" value_param="&quot;http&quot;" status="run" time="0.003" classname="Scheme/HTTPTest" />
+    <testcase name="QueryEncodeDecode/0" value_param="&quot;http&quot;" status="run" time="0" classname="Scheme/HTTPTest" />
+    <testcase name="Headers/0" value_param="&quot;http&quot;" status="run" time="0" classname="Scheme/HTTPTest" />
+    <testcase name="CaseInsensitiveHeaders/0" value_param="&quot;http&quot;" status="run" time="0" classname="Scheme/HTTPTest" />
+    <testcase name="WWWAuthenticateHeader/0" value_param="&quot;http&quot;" status="run" time="0.001" classname="Scheme/HTTPTest" />
+    <testcase name="Accepts/0" value_param="&quot;http&quot;" status="run" time="0.001" classname="Scheme/HTTPTest" />
+  </testsuite>
+  <testsuite name="Encryption/NetSocketTest" tests="2" failures="0" disabled="0" errors="0" time="0.004">
+    <testcase name="EOFBeforeRecv/0" value_param="&quot;Non-SSL&quot;" status="run" time="0.002" classname="Encryption/NetSocketTest" />
+    <testcase name="EOFAfterRecv/0" value_param="&quot;Non-SSL&quot;" status="run" time="0.002" classname="Encryption/NetSocketTest" />
+  </testsuite>
+</testsuites>
