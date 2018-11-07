@@ -55,7 +55,7 @@ case ${BUILDTOOL} in
     #make -j "${JOBS}" distcheck 2>&1
     cp reports/3rdparty/stout/tests/report.xml /SRC/stout_report.xml
     cp reports/3rdparty/libprocess/src/tests/report.xml /SRC/libprocess_report.xml
-    cp reports/src/tests/report.xmll /SRC/mesos_report.xml
+    cp reports/src/tests/report.xml /SRC/mesos_report.xml
     ;;
   cmake)
     # Transform autotools-like parameters to cmake-like.
