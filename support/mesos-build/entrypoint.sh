@@ -26,6 +26,8 @@ git clone --depth 1 file:///SRC "${SRCDIR}"
 
 cd "${SRCDIR}"
 
+export GTEST_FILTER="*FilesTest*" # Remove this.
+
 export GTEST_OUTPUT=xml:/SRC/report.xml
 export DISTCHECK_CONFIGURE_FLAGS=${CONFIGURATION}
 export ${ENVIRONMENT}
