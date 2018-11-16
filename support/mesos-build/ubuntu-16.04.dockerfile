@@ -71,5 +71,5 @@ RUN curl https://bootstrap.pypa.io/get-pip.py | python3
 RUN adduser --disabled-password --gecos '' mesos
 USER mesos
 
-COPY ["entrypoint.sh", "entrypoint.sh"]
-CMD ["./entrypoint.sh"]
+# COPY ["entrypoint.sh", "entrypoint.sh"]
+CMD ["/SRC/support/mesos-build/entrypoint.sh"]

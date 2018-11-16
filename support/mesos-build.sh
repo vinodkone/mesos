@@ -46,4 +46,4 @@ docker run \
   -e CONFIGURATION="${CONFIGURATION}" \
   -e ENVIRONMENT="${ENVIRONMENT}" \
   -e JOBS="${JOBS}" \
-  "mesos/mesos-build:${OS//:/-}"
+  "vinodkone/mesos-build:${OS//:/-}"
