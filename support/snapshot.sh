@@ -37,7 +37,12 @@ echo "Confirming that configure.ac contains ${VERSION}"
 grep "\[mesos\], \[${VERSION}\]" configure.ac
 
 echo "${GREEN}Updating configure.ac to include 'SNAPSHOT'.${NORMAL}"
-sed -i '' "s/\[mesos\], \[.*\]/[mesos], [${TAG}]/" configure.ac
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i '' "s/\[mesos\], \[.*\]/[mesos], [${TAG}]/" configure.ac
+else
+  sed -i "s/\[mesos\], \[.*\]/[mesos], [${TAG}]/" configure.ac
+fi
 
 # Build mesos.
 ./bootstrap
