@@ -19,8 +19,6 @@ TAG="${VERSION}-SNAPSHOT"
 
 echo "${GREEN}Deploying ${TAG}${NORMAL}"
 
-read -p "Hit enter to continue ... "
-
 WORK_DIR=`mktemp -d /tmp/mesos-tag-XXXX`
 atexit "rm -rf ${WORK_DIR}"
 
