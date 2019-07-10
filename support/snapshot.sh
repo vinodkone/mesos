@@ -55,7 +55,7 @@ popd
 
 # Build and deploy the jar.
 make -j3 maven-install
-mvn deploy -f src/java/mesos.pom
+mvn deploy -Dgpg.skip -f src/java/mesos.pom
 
 echo "${GREEN}Successfully deployed the jar to maven snapshot repository ...${NORMAL}"
 
