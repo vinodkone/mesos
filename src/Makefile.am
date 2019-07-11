@@ -2124,7 +2124,7 @@ $(EXAMPLES_JAR): $(EXAMPLES_SOURCE)
 CLEANFILES += $(EXAMPLES_JAR)
 
 maven-install: $(MESOS_JAR) java/mesos.pom
-	env JAVA_HOME=$(JAVA_HOME) $(MVN) -B -q -f java/mesos.pom install
+	env JAVA_HOME=$(JAVA_HOME) $(MVN) -B -q -f java/mesos.pom install -Dgpg.skip
 
 PHONY_TARGETS += maven-install
 endif # HAS_JAVA
