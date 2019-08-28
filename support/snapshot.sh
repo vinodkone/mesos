@@ -11,13 +11,11 @@ set -e
 # Use colors for errors.
 . $(dirname ${0})/colors.sh
 
-test ${#} -eq 1 || \
-  { echo "Usage: `basename ${0}` [version]"; exit 1; }
+test ${#} -eq 0 || \
+  { echo "Usage: `basename ${0}`"; exit 1; }
 
-VERSION=${1}
-TAG="${VERSION}-SNAPSHOT"
 
-echo "${GREEN}Deploying ${TAG}${NORMAL}"
+echo "${GREEN}Deploying SNAPSHOT JAR${NORMAL}"
 
 WORK_DIR=`mktemp -d /tmp/mesos-tag-XXXX`
 atexit "rm -rf ${WORK_DIR}"
@@ -32,11 +30,10 @@ git clone --shared ${MESOS_GIT_LOCAL} mesos
 
 pushd mesos
 
-# Ensure configure.ac has the correct version.
-echo "Confirming that configure.ac contains ${VERSION}"
-grep "\[mesos\], \[${VERSION}\]" configure.ac
+VERSION=`grep AC_INIT configure.ac | grep mesos | cut -d'[' -f3 | cut -d']' -f1`
+TAG="${VERSION}-SNAPSHOT"
 
-echo "${GREEN}Updating configure.ac to include 'SNAPSHOT'.${NORMAL}"
+echo "${GREEN}Updating version in configure.ac to ${TAG}.${NORMAL}"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i '' "s/\[mesos\], \[.*\]/[mesos], [${TAG}]/" configure.ac
