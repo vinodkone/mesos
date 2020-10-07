@@ -8,6 +8,8 @@ CENTOS_VERSION=$(rpm --eval '%{centos_ver}')
 MESOS_VERSION=${MESOS_TAG%[-]*}
 MESOS_RELEASE=${MESOS_RELEASE:-1}
 
+env
+
 PACKAGING_DIR=$(readlink -e "$(dirname "$(dirname "$0")")")
 MESOS_DIR=$(readlink -e $PACKAGING_DIR/../../)
 
