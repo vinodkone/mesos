@@ -2,6 +2,8 @@
 
 env
 
+id
+
 CENTOS_VERSION=$(rpm --eval '%{centos_ver}')
 MESOS_VERSION=${MESOS_TAG%[-]*}
 MESOS_RELEASE=${MESOS_RELEASE:-1}
